@@ -1,0 +1,3 @@
+[submodule "sanity-store"]
+	path = sanity-store
+	url = https://github.com/anxhirr/rroshi-store-sanity.git
