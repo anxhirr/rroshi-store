@@ -31,7 +31,9 @@ const FooterBanner = ({ footerBanner }) => {
           <h3>{midText}</h3>
           <p>{desc}</p>
           <Link href={`product/${product}`}>
-            <button type='button'>{buttonText}</button>
+            <button type='button' className='hover:scale-110 duration-200'>
+              {buttonText}
+            </button>
           </Link>
         </div>
 

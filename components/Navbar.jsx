@@ -12,9 +12,11 @@ const Navbar = () => {
     dispatch(cartActions.toggleCart())
   }
   return (
-    <div className='navbar-container'>
-      <p className='logo'>
-        <Link href='/'>Rroshi Headphones</Link>
+    <div className='lg:container lg:px-2 m-auto flex justify-between relative mb-4 '>
+      <p className='logo border-b-2 hover:border-b-2 hover:border-red-500 '>
+        <Link href='/' className='text-2xl'>
+          Rroshi Store
+        </Link>
       </p>
 
       <button type='button' className='cart-icon' onClick={handleCart}>

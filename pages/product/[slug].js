@@ -47,7 +47,7 @@ const ProductDetails = ({ product, products }) => {
           <div className='small-images-container'>
             {image?.map((item, i) => (
               <img
-                key={item._id}
+                key={item._key}
                 src={urlFor(item)}
                 className={`small-image ${i === index ? 'selected-image' : ''}`}
                 onMouseEnter={() => setIndex(i)}
@@ -56,7 +56,7 @@ const ProductDetails = ({ product, products }) => {
           </div>
         </div>
         <div className='product-detail-desc'>
-          <h1>{name}</h1>
+          <h1 className='text-3xl font-medium'>{name}</h1>
           <div className='reviews'>
             <div className='flex'>
               <AiFillStar />
@@ -67,11 +67,14 @@ const ProductDetails = ({ product, products }) => {
             </div>
             <p>(20)</p>
           </div>
-          <h4>Details</h4>
+          <h4 className='font-medium'>Details</h4>
           <p>{details}</p>
-          <p className='price'>${price}</p>
-          <div className='quantity'>
-            <h3>Quantity:</h3>
+          <div className='mt-5'>
+            <h4 className='font-medium'>Price</h4>
+            <p className='text-red-500 font-bold text-2xl'>${price}</p>
+          </div>
+          <div className='quantity '>
+            <h3 className='font-medium'>Quantity:</h3>
             <p className='quantity-desc flex items-center'>
               <span className='minus' onClick={handleMinus}>
                 <AiOutlineMinus />

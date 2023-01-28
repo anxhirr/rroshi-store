@@ -19,14 +19,11 @@ const Cart = () => {
     (state) => state.cart
   )
 
-  console.log(totalPrice, totalQuantity, cartItems)
-
   const handleCart = () => {
     dispatch(cartActions.toggleCart())
   }
 
   const handleRemoveItem = (id) => {
-    console.log(id)
     dispatch(cartActions.removeItemFromCart(id))
   }
 
@@ -59,7 +56,6 @@ const Cart = () => {
         )}
 
         <div className='product-container'>
-          {console.log(cartItems)}
           {cartItems.length >= 1 &&
             cartItems.map((item, i) => (
               <div className='product' key={item._id}>
@@ -69,9 +65,9 @@ const Cart = () => {
                   className='cart-product-image'
                 />
                 <div className='item-desc'>
-                  <div className='flex top'>
+                  <div className='flex top items-center'>
                     <h5>{item.name}</h5>
-                    <h4>${item.price * item.quantity}</h4>
+                    <h4 className='font-bold '>${item.price}</h4>
                   </div>
                   <div className='flex bottom '>
                     <div>
@@ -96,7 +92,7 @@ const Cart = () => {
                       className='remove-item'
                       onClick={() => handleRemoveItem(item._id)}
                     >
-                      <TiDeleteOutline />
+                      <TiDeleteOutline className='text-4xl' />
                     </button>
                   </div>
                 </div>
@@ -107,6 +103,10 @@ const Cart = () => {
           <div className='cart-bottom'>
             <div className='total'>
               <h3>Subtotal</h3>
+              <h3>
+                ( {totalQuantity}
+                {totalQuantity > 1 ? ' Items' : ' Item'} )
+              </h3>
               <h3>${totalPrice}</h3>
             </div>
             <div className='btn-container'>

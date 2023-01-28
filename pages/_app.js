@@ -10,6 +10,7 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Layout>
+        <Toaster />
         <Component {...pageProps} />
       </Layout>
     </Provider>
