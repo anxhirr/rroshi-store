@@ -11,7 +11,7 @@ const Product = ({ product }) => {
   return (
     <div>
       <Link href={`/product/${slug.current}`}>
-        <div className='product-card'>
+        <div className='product-card text-center'>
           <img
             src={urlFor(image && image[0])}
             alt='product'
@@ -21,7 +21,10 @@ const Product = ({ product }) => {
           />
 
           <p className='product-name'>{name}</p>
-          <p className='product-price'>${price}</p>
+          <p className='font-extrabold '>
+            {price}
+            <span className='font-medium'> LEK</span>
+          </p>
         </div>
       </Link>
     </div>
