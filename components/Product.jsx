@@ -17,7 +17,7 @@ const Product = ({ product }) => {
             alt='product'
             width={250}
             height={250}
-            className='product-image'
+            className='product-image h-64'
           />
 
           <p className='product-name'>{name}</p>
