@@ -36,7 +36,7 @@ const ProductDetails = ({ product, products }) => {
     <div>
       <div className='product-detail-container'>
         <div>
-          <div className='image-container'>
+          <div className='product-image-container'>
             <img
               src={urlFor(image && image[index])}
               alt='product detail'
@@ -67,11 +67,14 @@ const ProductDetails = ({ product, products }) => {
             </div>
             <p>(20)</p>
           </div>
-          <h4 className='font-medium'>Details</h4>
+          <h4 className='font-medium'>Detajet</h4>
           <p>{details}</p>
           <div className='mt-5'>
-            <h4 className='font-medium'>Price</h4>
-            <p className='text-red-500 font-bold text-2xl'>${price}</p>
+            <h4 className='font-medium'>Cmimi</h4>
+            <p>
+              <span className='text-red-500 font-bold text-2xl'>{price}</span>
+              <span className='font-medium text-lg'> LEK</span>
+            </p>
           </div>
           <div className='quantity '>
             <h3 className='font-medium'>Quantity:</h3>
@@ -91,17 +94,17 @@ const ProductDetails = ({ product, products }) => {
               className='add-to-cart'
               onClick={() => onAddToCart(product, quantity)}
             >
-              Add to Cart
+              Shto ne Shportë
             </button>
             <button type='button' className='buy-now'>
-              Buy Now
+              Porosit Tani
             </button>
           </div>
         </div>
       </div>
 
       <div className='maylike-products-wrapper'>
-        <h2>You may also like</h2>
+        <h2>Produkte të ngjashme</h2>
         <div className='marquee'>
           <div className='maylike-products-container track'>
             {products.map((item) => (

@@ -39,17 +39,17 @@ const Cart = () => {
       <div className='cart-container'>
         <button type='button' className='cart-heading' onClick={handleCart}>
           <AiOutlineLeft />
-          <span className='heading'>Your Cart</span>
+          <span className='heading'>Shporta</span>
           <span className='cart-num-items'>({totalQuantity})</span>
         </button>
 
         {cartItems.length < 1 && (
           <div className='empty-cart'>
             <AiOutlineShopping size={150} />
-            <h3>Your shopping bag is empty</h3>
+            <h3>Shporta juaj është bosh</h3>
             <Link href='/'>
               <button type='button' className='btn' onClick={handleCart}>
-                Continue Shopping
+                Shiko produkte të tjera
               </button>
             </Link>
           </div>
