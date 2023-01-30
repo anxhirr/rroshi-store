@@ -34,6 +34,10 @@ const Cart = () => {
     dispatch(cartActions.decCartItemQuantity(id))
   }
 
+  const handleCheckout = () => {
+    dispatch(cartActions.toggleCart())
+  }
+
   return (
     <div className='cart-wrapper' ref={cartRef}>
       <div className='cart-container'>
@@ -110,9 +114,11 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className='btn-container'>
-              <button type='button' className='btn'>
-                Checkout
-              </button>
+              <Link href='/checkout'>
+                <button onClick={handleCheckout} type='button' className='btn'>
+                  Checkout
+                </button>
+              </Link>
             </div>
           </div>
         )}

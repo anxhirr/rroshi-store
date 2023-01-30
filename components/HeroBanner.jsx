@@ -16,7 +16,10 @@ const HeroBanner = ({ heroBanner }) => {
         />
         <div>
           <Link href={`/product/${heroBanner.product}`}>
-            <button type='button ' className='hover:scale-110 duration-200'>
+            <button
+              type='button '
+              className='hover:scale-110 duration-200 button relative mt-20 red'
+            >
               {heroBanner.buttonText}
             </button>
           </Link>

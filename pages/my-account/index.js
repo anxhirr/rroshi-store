@@ -165,7 +165,7 @@ const MyAccount = () => {
 
   return (
     <div>
-      <h1 className='text-4xl font-bold mb-8 pt-12 '>My Account</h1>
+      <h1 className='text-4xl font-bold mb-8 pt-12'>My Account</h1>
 
       <div className='flex gap-10 justify-between flex-col sm:flex-row'>
         <div className='log-in flex-1'>

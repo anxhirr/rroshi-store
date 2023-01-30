@@ -16,7 +16,7 @@ const Navbar = () => {
   return (
     <div className='lg:container lg:px-2 m-auto flex justify-between relative mb-4 text-gray-500 '>
       <p className='border-b-2 hover:border-b-2 hover:border-red-500 '>
-        <Link href='/' className='text-2xl'>
+        <Link href='/' className='text-2xl font-bold'>
           Rroshi Store
         </Link>
       </p>
