@@ -79,10 +79,8 @@ span.text-red {
 }
 .cart-icon {
   font-size: 25px;
-  color: gray;
   cursor: pointer;
   position: relative;
-  transition: transform 0.4s ease;
   border: none;
   background-color: transparent;
 }
@@ -759,4 +757,30 @@ span.text-red {
     width: 300px;
     margin: auto;
   }
+}
+
+.button {
+  border-radius: 1rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+  scale: 1.05;
+  transform: translateY(-4px);
+}
+
+.button.white {
+  background-color: white;
+  color: red;
+}
+
+.button.red {
+  background-color: red;
+  color: white;
 }

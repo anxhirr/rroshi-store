@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { AiOutlineShopping } from 'react-icons/ai'
+import { RiAccountCircleLine } from 'react-icons/ri'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { cartActions } from '@/redux-store/cart-slice'
 import { Cart } from '.'
@@ -12,17 +14,29 @@ const Navbar = () => {
     dispatch(cartActions.toggleCart())
   }
   return (
-    <div className='lg:container lg:px-2 m-auto flex justify-between relative mb-4 '>
-      <p className='logo border-b-2 hover:border-b-2 hover:border-red-500 '>
+    <div className='lg:container lg:px-2 m-auto flex justify-between relative mb-4 text-gray-500 '>
+      <p className='border-b-2 hover:border-b-2 hover:border-red-500 '>
         <Link href='/' className='text-2xl'>
           Rroshi Store
         </Link>
       </p>
 
-      <button type='button' className='cart-icon' onClick={handleCart}>
-        <AiOutlineShopping />
-        <span className='cart-item-qty'>{totalQuantity}</span>
-      </button>
+      <div className='flex gap-6 items-center'>
+        <Link
+          href='/my-account'
+          className='text-2xl cursor-pointer duration-150  hover:scale-110'
+        >
+          <RiAccountCircleLine />
+        </Link>
+        <button
+          type='button'
+          className='cart-icon duration-150'
+          onClick={handleCart}
+        >
+          <AiOutlineShopping />
+          <span className='cart-item-qty'>{totalQuantity}</span>
+        </button>
+      </div>
 
       {showCart && <Cart />}
     </div>
