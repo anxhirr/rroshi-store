@@ -8,6 +8,8 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { FcGoogle } from 'react-icons/fc'
 import { authActions } from '@/redux-store/auth-slice'
 import { toast } from 'react-hot-toast'
+import Link from 'next/link'
+import { MessengerChat } from 'react-messenger-chat-plugin'
 
 const API_KEY = 'AIzaSyCT_v-TDTTBEZIDY6vPFeOGQf1W9jVMyQ4'
 
@@ -210,9 +212,12 @@ const MyAccount = () => {
                   Hyr
                 </button>
 
-                <a className='cursor-pointer hover:text-red-500'>
+                <Link
+                  href='/my-account/forgot-password'
+                  className='cursor-pointer hover:text-red-500'
+                >
                   Harruat fjalëkalimin?
-                </a>
+                </Link>
               </div>
             </div>
           </form>
