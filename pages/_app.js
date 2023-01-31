@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
     <Provider store={store}>
       <Layout>
         <Toaster />
-        <MessengerChat pageId='109268111769502' />
+        <MessengerChat pageId='427120347728357' />
         <Component {...pageProps} />
       </Layout>
     </Provider>
