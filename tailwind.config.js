@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily: {
+      monospace: ['monospace', 'sans-serif'],
+    },
   },
   plugins: [],
 }

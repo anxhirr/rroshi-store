@@ -78,13 +78,15 @@ const ProductDetails = ({ product, products }) => {
           </div>
           <div className='quantity '>
             <h3 className='font-medium'>Quantity:</h3>
-            <p className='quantity-desc flex items-center'>
-              <span className='minus' onClick={handleMinus}>
-                <AiOutlineMinus />
+            <p className='quantity-desc border p-3 px-5 border-gray-500 flex items-center max-w-min gap-2'>
+              <span className='cursor-pointer' onClick={handleMinus}>
+                <AiOutlineMinus className='text-red-600' />
               </span>
-              <span className='num'>{quantity}</span>
-              <span className='plus' onClick={handlePlus}>
-                <AiOutlinePlus />
+              <span className='px-2 border-x border-gray-500 font-bold text-lg font-monospace'>
+                {quantity}
+              </span>
+              <span className='cursor-pointer' onClick={handlePlus}>
+                <AiOutlinePlus className='text-green-600' />
               </span>
             </p>
           </div>

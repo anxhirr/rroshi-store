@@ -16,7 +16,7 @@ const Succes = () => {
           <BsBagCheckFill />
         </p>
         <h2>Faleminderit për orderin tuaj</h2>
-        <p className='email-msg'>Kontrolloni email-in tuaj per fauturën</p>
+        <p className='email-msg'>Kontrolloni email-in tuaj per faturën</p>
         <p className='description'>
           Nëse keni ndonjë pyetje, ju lutem na dergoni email
           <a className='email' href='mailto:rroshistore@gmail.com'>

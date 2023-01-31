@@ -18,7 +18,7 @@ const Footer = () => {
           <RiInstagramFill />
         </Link>
         <Link
-          href='https://www.facebook.com/profile.php?id=100011414311113'
+          href='https://www.facebook.com/rroshistore'
           target='_blank'
           className='hover:opacity-90 cursor-pointer'
         >

@@ -23,20 +23,43 @@ a {
 }
 
 .main-container {
-  max-width: 1400px;
-  margin: auto;
-  width: 100%;
-}
-.layout {
-  padding: 10px;
+  --max-width: 80rem;
+  --padding: 0.3rem;
+
+  margin-inline: auto;
+  width: min(var(--max-width), 100% - var(--padding) * 2);
 }
 
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  margin: 6px 18px;
-  position: relative;
+.button {
+  border-radius: 1rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+
+  transition: all 0.2s ease-in-out;
 }
+
+.button:hover {
+  scale: 1.05;
+  transform: translateY(-4px);
+}
+
+.button.white {
+  background-color: white;
+  color: red;
+}
+
+.button.red {
+  background-color: red;
+  color: white;
+}
+
+.layout {
+  padding: 0.625rem;
+}
+
 .marquee-text {
   font-size: 29px;
   font-weight: 600;
@@ -212,21 +235,15 @@ span.text-red {
   font-weight: 800;
 }
 .footer-banner-container {
-  padding: 100px 40px;
   background-color: #f02d34;
   border-radius: 15px;
   position: relative;
-  height: 400px;
   line-height: 1;
   color: white;
   width: 100%;
-  margin-top: 120px;
 }
-.banner-desc {
-  display: flex;
-  justify-content: space-between;
-}
-.banner-desc button {
+
+/* .banner-desc button {
   border-radius: 15px;
   padding: 10px 16px;
   background-color: white;
@@ -236,7 +253,8 @@ span.text-red {
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
-}
+} */
+
 .banner-desc .left h3 {
   font-weight: 900;
   font-size: 80px;
@@ -245,20 +263,10 @@ span.text-red {
 .banner-desc .left p {
   margin: 18px;
 }
-.footer-banner-image {
-  position: absolute;
-  /* top: -35%;
-  left: 8%; */
-  top: -25%;
-  left: 25%;
-}
 .banner-desc .right {
   line-height: 1.4;
 }
-.banner-desc .right h3 {
-  font-weight: 800;
-  font-size: 60px;
-}
+
 .banner-desc .right p {
   font-size: 18px;
 }
@@ -522,26 +530,6 @@ span.text-red {
 .buttons .buy-now:hover {
   transform: scale(1.1, 1.1);
 }
-.quantity-desc {
-  border: 1px solid gray;
-  padding: 6px;
-}
-.quantity-desc span {
-  font-size: 16px;
-  padding: 6px 12px;
-  cursor: pointer;
-}
-.quantity-desc .minus {
-  color: #f02d34;
-}
-.quantity-desc .num {
-  border-right: 1px solid gray;
-  border-left: 1px solid gray;
-  font-size: 20px;
-}
-.quantity-desc .plus {
-  color: rgb(49, 168, 49);
-}
 
 .maylike-products-wrapper {
   margin-top: 120px;
@@ -627,36 +615,14 @@ span.text-red {
     top: -2%;
     right: -6%;
   }
-  .footer-banner-container {
-    height: 560px;
-    margin-top: 80px;
-  }
-  .footer-banner-image {
-    width: 77%;
-    left: 30%;
-    top: 6%;
-    height: 56%;
-  }
-  .banner-desc .left h3 {
-    font-weight: 900;
-    font-size: 50px;
-    margin-left: 5px;
-  }
-  .banner-desc .left p {
-    margin: 18px;
-  }
-  .banner-desc .right h3 {
-    font-size: 45px;
-  }
-  .banner-desc .right p {
-    font-size: 18px;
-  }
-  .banner-desc .right .company-desc {
-    font-size: 14px;
-  }
+
   .banner-desc {
-    flex-wrap: wrap;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .banner-desc .right {
+    grid-column: span 2;
   }
   .hero-banner-container {
     line-height: 1.3;
@@ -758,28 +724,20 @@ span.text-red {
   }
 }
 
-.button {
-  border-radius: 1rem;
-  padding: 0.7rem 1.5rem;
-  border: none;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
+@media screen and (max-width: 600px) {
+  .banner-desc {
+    display: flex;
+    flex-direction: column;
+  }
 
-  transition: all 0.3s ease-in-out;
-}
+  .banner-desc .left {
+    padding-bottom: 0;
+  }
+  .banner-desc .right {
+    padding-top: 0;
+  }
 
-.button:hover {
-  scale: 1.05;
-  transform: translateY(-4px);
-}
-
-.button.white {
-  background-color: white;
-  color: red;
-}
-
-.button.red {
-  background-color: red;
-  color: white;
+  .banner-desc .left h3 {
+    display: inline-block;
+  }
 }

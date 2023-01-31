@@ -1,13 +1,33 @@
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 
 const Checkout = () => {
+  const { cartItems, totalPrice } = useSelector((state) => state.cart)
+
+  console.log(cartItems)
+
   return (
     <div>
       <h1 className='text-4xl font-bold mb-8 pt-12'>Checkout</h1>
 
-      <div className='flex'>
+      <div className='flex gap-6'>
         <div className='flex-1'>
           <h2 className='text-2xl font-medium mb-6'>Detajet e dërgesës</h2>
+
+          <div>
+            <div className='flex justify-between'>
+              <h3> Produkt</h3>
+              <p>Total</p>
+            </div>
+            {cartItems.length > 2 ? (
+              cartItems.map((item) => <p key={item.id}></p>)
+            ) : (
+              <div className='flex justify-between'>
+                <p>{cartItems[0].name}</p>
+                <p>{totalPrice}</p>
+              </div>
+            )}
+          </div>
         </div>
 
         <div className='flex-1'>

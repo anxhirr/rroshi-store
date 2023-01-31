@@ -32,6 +32,8 @@ const cartSlice = createSlice({
       state.cartItems[foundItemIndex].quantity++
       state.totalQuantity++
       state.totalPrice += state.cartItems[foundItemIndex].price
+
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     decCartItemQuantity(state, action) {
       const id = action.payload
@@ -43,6 +45,8 @@ const cartSlice = createSlice({
       state.cartItems[foundItemIndex].quantity--
       state.totalQuantity--
       state.totalPrice -= state.cartItems[foundItemIndex].price
+
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
 
     addItemToCart(state, action) {
@@ -63,6 +67,8 @@ const cartSlice = createSlice({
       }
 
       toast.success(`${state.quantity} ${newItem.name} added to the cart.`)
+
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     removeItemFromCart(state, action) {
       const id = action.payload
@@ -74,6 +80,8 @@ const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter((item) => item._id !== id)
 
       toast.success(`${foundItem.name} removed from the cart.`)
+
+      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
   },
 })

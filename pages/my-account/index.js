@@ -147,8 +147,14 @@ const MyAccount = () => {
   // }
 
   const signInWithGoogle = async () => {
-    const result = await signInWithPopup(auth, provider)
-    console.log(result)
+    try {
+      const res = await signInWithPopup(auth, provider)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+
+      toast.error(error.message)
+    }
   }
 
   if (loading) {

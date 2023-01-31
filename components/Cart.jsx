@@ -75,19 +75,21 @@ const Cart = () => {
                   </div>
                   <div className='flex bottom '>
                     <div>
-                      <p className='quantity-desc flex items-center max-w-min'>
+                      <p className='quantity-desc border p-2 px-4 border-gray-500 flex items-center max-w-min gap-2'>
                         <span
-                          className='minus'
+                          className='cursor-pointer '
                           onClick={() => handleDecQuantity(item._id)}
                         >
-                          <AiOutlineMinus />
+                          <AiOutlineMinus className='text-red-600' />
                         </span>
-                        <span className='num'>{item.quantity}</span>
+                        <span className='px-2 border-x border-gray-500 font-bold text-lg font-monospace'>
+                          {item.quantity}
+                        </span>
                         <span
-                          className='plus'
+                          className='plus cursor-pointer'
                           onClick={() => handleIncQuantity(item._id)}
                         >
-                          <AiOutlinePlus />
+                          <AiOutlinePlus className='text-green-600' />
                         </span>
                       </p>
                     </div>
@@ -111,7 +113,7 @@ const Cart = () => {
                 ( {totalQuantity}
                 {totalQuantity > 1 ? ' Items' : ' Item'} )
               </h3>
-              <h3>${totalPrice}</h3>
+              <h3>{totalPrice} LEK</h3>
             </div>
             <div className='btn-container'>
               <Link href='/checkout'>
