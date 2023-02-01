@@ -14,7 +14,7 @@ const Navbar = () => {
     dispatch(cartActions.toggleCart())
   }
   return (
-    <div className='main-container flex justify-between relative mb-4 text-gray-500 '>
+    <div className='main-container flex justify-between relative mb-4 text-gray-600 '>
       <p className='border-b-2 hover:border-b-2 hover:border-red-500 '>
         <Link href='/' className='text-2xl font-bold'>
           Rroshi Store

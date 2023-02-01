@@ -9,7 +9,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { authActions } from '@/redux-store/auth-slice'
 import { toast } from 'react-hot-toast'
 import Link from 'next/link'
-import { MessengerChat } from 'react-messenger-chat-plugin'
+import { GreenToBlueBtn, PurpleToBlueBtn } from '@/components/buttons'
 
 const API_KEY = 'AIzaSyCT_v-TDTTBEZIDY6vPFeOGQf1W9jVMyQ4'
 
@@ -204,17 +204,14 @@ const MyAccount = () => {
               />
 
               <div className='flex gap-6 items-center'>
-                <button
-                  type='submit'
-                  className='button red'
+                <PurpleToBlueBtn
                   onClick={handleLoginAndSignUp}
-                >
-                  Hyr
-                </button>
+                  buttonText='Hyr'
+                />
 
                 <Link
                   href='/my-account/forgot-password'
-                  className='cursor-pointer hover:text-red-500'
+                  className='cursor-pointer hover:text-red-500 hover:underline'
                 >
                   Harruat fjalëkalimin?
                 </Link>
@@ -226,7 +223,7 @@ const MyAccount = () => {
             <p className='mx-4'>ose hyni me ...</p>
             <span className='flex-1 h-px bg-slate-400'></span>
           </div>
-          <div>
+          <div className='hover:scale-105 duration-150 hover:shadow-2xl'>
             <button
               className='border-2 flex justify-between w-full items-center p-4 rounded-xl'
               onClick={signInWithGoogle}
@@ -284,13 +281,17 @@ const MyAccount = () => {
               </p>
 
               <div>
-                <button
+                <GreenToBlueBtn
+                  buttonText='Rregjistrohuni'
+                  onClick={handleLoginAndSignUp}
+                />
+                {/* <button
                   type='submit'
-                  className='button red'
+                  className='button red hover:shadow-2xl'
                   onClick={handleLoginAndSignUp}
                 >
                   Rregjistrohuni
-                </button>
+                </button> */}
               </div>
             </div>
           </form>

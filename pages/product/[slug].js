@@ -10,6 +10,7 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from 'react-icons/ai'
+import Link from 'next/link'
 
 const ProductDetails = ({ product, products }) => {
   const dispatch = useDispatch()
@@ -98,9 +99,11 @@ const ProductDetails = ({ product, products }) => {
             >
               Shto ne Shportë
             </button>
-            <button type='button' className='buy-now'>
-              Porosit Tani
-            </button>
+            <Link href='/checkout'>
+              <button type='button' className='buy-now'>
+                Porosit Tani
+              </button>
+            </Link>
           </div>
         </div>
       </div>

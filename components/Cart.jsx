@@ -10,7 +10,7 @@ import {
   AiOutlineLeft,
   AiOutlineShopping,
 } from 'react-icons/ai'
-import { TiDeleteOutline } from 'react-icons/ti'
+import { RiDeleteBin6Line } from 'react-icons/ri'
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -40,8 +40,12 @@ const Cart = () => {
 
   return (
     <div className='cart-wrapper' ref={cartRef}>
-      <div className='cart-container'>
-        <button type='button' className='cart-heading' onClick={handleCart}>
+      <div className='float-right h-full bg-white relative py-4 px-2 '>
+        <button
+          type='button'
+          className='cart-heading text-xl'
+          onClick={handleCart}
+        >
           <AiOutlineLeft />
           <span className='heading'>Shporta</span>
           <span className='cart-num-items'>({totalQuantity})</span>
@@ -62,16 +66,16 @@ const Cart = () => {
         <div className='product-container'>
           {cartItems.length >= 1 &&
             cartItems.map((item, i) => (
-              <div className='product' key={item._id}>
+              <div className='flex gap-6' key={item._id}>
                 <img
                   src={urlFor(item?.image[0])}
                   alt='cart item'
-                  className='cart-product-image'
+                  className='h-36 w-44 rounded-md bg-milk'
                 />
                 <div className='item-desc'>
                   <div className='flex top items-center'>
                     <h5>{item.name}</h5>
-                    <h4 className='font-bold '>${item.price}</h4>
+                    <h4 className='font-bold '>{item.price} LEK</h4>
                   </div>
                   <div className='flex bottom '>
                     <div>
@@ -98,7 +102,7 @@ const Cart = () => {
                       className='remove-item'
                       onClick={() => handleRemoveItem(item._id)}
                     >
-                      <TiDeleteOutline className='text-4xl' />
+                      <RiDeleteBin6Line className='text-gray-600 text-2xl hover:text-red-600 hover:scale-110' />
                     </button>
                   </div>
                 </div>
