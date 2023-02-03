@@ -6,12 +6,11 @@ import product from '@/sanity-store/schemas/product'
 
 const Product = ({ product }) => {
   const { image, name, slug, price } = product
-  const { cartItems } = useSelector((state) => state.cart)
 
   return (
     <div>
       <Link href={`/product/${slug.current}`}>
-        <div className='product-card text-center'>
+        <div className='product-card w-max text-center'>
           <img
             src={urlFor(image && image[0])}
             alt='product'
