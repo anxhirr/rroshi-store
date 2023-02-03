@@ -11,6 +11,7 @@ import {
   AiOutlineStar,
 } from 'react-icons/ai'
 import Link from 'next/link'
+import { AlternativeBtn, DefaultBtn } from '@/components/buttons'
 
 const ProductDetails = ({ product, products }) => {
   const dispatch = useDispatch()
@@ -91,18 +92,14 @@ const ProductDetails = ({ product, products }) => {
               </span>
             </p>
           </div>
-          <div className='buttons'>
-            <button
-              type='button'
-              className='add-to-cart'
+          <div className='flex gap-5 mt-8'>
+            <AlternativeBtn
+              buttonText='Shto në Shportë'
+              className=''
               onClick={() => onAddToCart(product, quantity)}
-            >
-              Shto ne Shportë
-            </button>
+            />
             <Link href='/checkout'>
-              <button type='button' className='buy-now'>
-                Porosit Tani
-              </button>
+              <DefaultBtn buttonText='Porosit Tani' />
             </Link>
           </div>
         </div>

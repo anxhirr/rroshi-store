@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { urlFor } from '@/lib/client'
+import { WhiteBtn } from './buttons'
 
 const FooterBanner = ({ footerBanner }) => {
   const {
@@ -38,9 +39,7 @@ const FooterBanner = ({ footerBanner }) => {
           <h3 className='font-extrabold text-6xl'>{midText}</h3>
           <p>{desc}</p>
           <Link href={`product/${product}`}>
-            <button type='button' className='button white mt-5'>
-              {buttonText}
-            </button>
+            <WhiteBtn buttonText={buttonText} className='mt-6' />
           </Link>
         </div>
       </div>

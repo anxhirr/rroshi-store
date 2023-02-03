@@ -50,7 +50,6 @@ const MyAccount = () => {
       })
 
       const data = await res.json()
-      console.log(data)
 
       if (!res.ok) {
         throw new Error(data.error.message || 'Something went wrong')
@@ -58,103 +57,29 @@ const MyAccount = () => {
 
       if (isLogIn) {
         toast.success('You are logged in')
-        console.log('User logged in')
         router.push('/my-account/profile')
         dispatch(authActions.setIsAuthenticated(true))
-
-        // dispatch(authActions.setRegUserName(data.displayName))
+        dispatch(authActions.setRegUserName(data.displayName))
+        dispatch(authActions.setEmail(''))
+        dispatch(authActions.setPassword(''))
       } else {
         toast.success('You are registered, now you can log in')
-        console.log('User created')
+        dispatch(authActions.setRegUserName(''))
+        dispatch(authActions.setRegEmail(''))
+        dispatch(authActions.setRegPassword(''))
       }
-
-      dispatch(authActions.setEmail(''))
-      dispatch(authActions.setPassword(''))
-      dispatch(authActions.setRegUserName(''))
-      dispatch(authActions.setRegEmail(''))
-      dispatch(authActions.setRegPassword(''))
     } catch (error) {
       toast.error(error.message)
-      console.log(error)
     }
   }
 
-  // const handleNewUserReg = async (e) => {
-  //   e.preventDefault()
-
-  //   try {
-  //     const res = await fetch(
-  //       `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`,
-  //       {
-  //         method: 'POST',
-  //         body: JSON.stringify({
-  //           email: regEmail,
-  //           password: regPassword,
-  //           returnSecureToken: true,
-  //         }),
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     )
-
-  //     const data = await res.json()
-  //     console.log(data)
-
-  //     if (!res.ok) {
-  //       throw new Error(data.error.message || 'Something went wrong')
-  //     }
-
-  //     router.push('/my-account/profile')
-
-  //     dispatch(authActions.setIsAuthenticated(true))
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // const handleLogIn = async (e) => {
-  //   e.preventDefault()
-  //   console.log(email)
-
-  //   try {
-  //     const res = await fetch(
-  //       `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`,
-  //       {
-  //         method: 'POST',
-  //         body: JSON.stringify({
-  //           email,
-  //           password,
-  //           returnSecureToken: true,
-  //         }),
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //       }
-  //     )
-
-  //     const data = await res.json()
-  //     console.log(data)
-
-  //     if (!res.ok) {
-  //       throw new Error(data.error.message || 'Something went wrong')
-  //     }
-
-  //     router.push('/my-account/profile')
-
-  //     dispatch(authActions.setIsAuthenticated(true))
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
   const signInWithGoogle = async () => {
     try {
-      const res = await signInWithPopup(auth, provider)
-      console.log(res)
-    } catch (error) {
-      console.log(error)
+      const data = await signInWithPopup(auth, provider)
 
+      toast.success('You are logged in')
+      dispatch(authActions.setRegUserName(data.user.displayName))
+    } catch (error) {
       toast.error(error.message)
     }
   }
@@ -285,13 +210,6 @@ const MyAccount = () => {
                   buttonText='Rregjistrohuni'
                   onClick={handleLoginAndSignUp}
                 />
-                {/* <button
-                  type='submit'
-                  className='button red hover:shadow-2xl'
-                  onClick={handleLoginAndSignUp}
-                >
-                  Rregjistrohuni
-                </button> */}
               </div>
             </div>
           </form>

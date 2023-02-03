@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { initFirebase } from '@/firebase/firebaseApp'
 import { getAuth } from 'firebase/auth'
 import { authActions } from '@/redux-store/auth-slice'
+import { RedBtn } from '@/components/buttons'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -21,12 +22,12 @@ const Profile = () => {
     dispatch(authActions.setIsAuthenticated(false))
   }
   return (
-    <div className='text-center'>
-      <h1>Profile Page</h1>
+    <div className='flex flex-col gap-6 items-center'>
+      <h1 className='text-6xl'>Profile Page</h1>
 
-      <h2>Weelcome {regUserName}</h2>
+      <h2 className='text-2xl'>Wellcome {regUserName}</h2>
 
-      <button onClick={handleLogOut}>Log Out</button>
+      <RedBtn buttonText='Log out' onClick={handleLogOut} />
     </div>
   )
 }

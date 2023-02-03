@@ -1,3 +1,4 @@
+import { RedBtn, WhiteBtn } from '@/components/buttons'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -9,8 +10,6 @@ const ForgotPassword = () => {
   const [resPassEmail, setResPassEmail] = useState('')
 
   const [showBackToLogin, setShowBackToLogin] = useState(false)
-
-  console.log(showBackToLogin)
 
   const handleResetPassword = async (e) => {
     e.preventDefault()
@@ -31,13 +30,13 @@ const ForgotPassword = () => {
       )
 
       const data = await res.json()
-      console.log(data)
 
       if (!res.ok) {
         throw new Error(data.error.message || 'Something went wrong')
       }
 
       toast.success('Emaili u dërgua me sukses')
+      setResPassEmail('')
       setShowBackToLogin(true)
     } catch (err) {
       toast.error(err.message)
@@ -61,23 +60,16 @@ const ForgotPassword = () => {
           placeholder='Email'
           type='email'
           id='email'
+          value={resPassEmail}
           className='mb-6 border-2 w-full h-10 rounded-md px-2 py-5'
         />
 
         {showBackToLogin ? (
-          <Link href='/my-account'>
-            <button type='submit' className='button white w-full'>
-              Kthehu tek hyrja
-            </button>
+          <Link href='/my-account' className='w-full'>
+            <RedBtn buttonText='Kthehu tek hyrja' className='w-full' />
           </Link>
         ) : (
-          <button
-            type='submit'
-            className='button white w-full'
-            onClick={(e) => handleResetPassword(e)}
-          >
-            Dërgo
-          </button>
+          <RedBtn buttonText='Dërgo' onClick={(e) => handleResetPassword(e)} />
         )}
       </div>
     </div>

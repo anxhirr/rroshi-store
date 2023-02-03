@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import { urlFor } from '@/lib/client'
-import GreenToBlueBtn from './buttons'
+import { RedBtn } from './buttons'
 
 const HeroBanner = ({ heroBanner }) => {
   return (
@@ -18,9 +18,10 @@ const HeroBanner = ({ heroBanner }) => {
           />
           <div>
             <Link href={`/product/${heroBanner.product}`}>
-              <button type='button' className='button red relative mt-20'>
-                {heroBanner.buttonText}
-              </button>
+              <RedBtn
+                buttonText={heroBanner.buttonText}
+                className='mt-12 leading-5'
+              />
             </Link>
             <div className='desc'>
               <h5>Përshkrimi</h5>
