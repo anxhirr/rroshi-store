@@ -1,8 +1,7 @@
 import Link from 'next/link'
 
 import { urlFor } from '@/lib/client'
-import { useSelector } from 'react-redux'
-import product from '@/sanity-store/schemas/product'
+import { formatToLEK } from '@/lib/formatCurrency'
 
 const Product = ({ product }) => {
   const { image, name, slug, price } = product
@@ -20,10 +19,7 @@ const Product = ({ product }) => {
           />
 
           <p className='product-name'>{name}</p>
-          <p className='font-extrabold '>
-            {price}
-            <span className='font-medium'> LEK</span>
-          </p>
+          <p className='font-extrabold '>{formatToLEK(price)}</p>
         </div>
       </Link>
     </div>

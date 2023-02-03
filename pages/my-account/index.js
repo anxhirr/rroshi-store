@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { initFirebase } from '@/firebase/firebaseApp'
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
@@ -7,6 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 
 import { FcGoogle } from 'react-icons/fc'
 import { authActions } from '@/redux-store/auth-slice'
+import { checkoutActions } from '@/redux-store/checkout-slice'
 import { toast } from 'react-hot-toast'
 import Link from 'next/link'
 import { GreenToBlueBtn, PurpleToBlueBtn } from '@/components/buttons'
@@ -23,6 +23,8 @@ const MyAccount = () => {
 
   const { isAuthenticated, regEmail, regPassword, email, password } =
     useSelector((state) => state.auth)
+
+  const { isCheckingOut } = useSelector((state) => state.checkout)
 
   const handleLoginAndSignUp = async (e) => {
     e.preventDefault()
@@ -57,8 +59,17 @@ const MyAccount = () => {
 
       if (isLogIn) {
         toast.success('You are logged in')
-        router.push('/my-account/profile')
+
+        if (isCheckingOut && !isAuthenticated) {
+          router.push('/checkout')
+
+          dispatch(checkoutActions.setIsCheckingOut(false))
+        } else {
+          router.push('/my-account/profile')
+        }
+
         dispatch(authActions.setIsAuthenticated(true))
+
         dispatch(authActions.setRegUserName(data.displayName))
         dispatch(authActions.setEmail(''))
         dispatch(authActions.setPassword(''))
@@ -78,6 +89,17 @@ const MyAccount = () => {
       const data = await signInWithPopup(auth, provider)
 
       toast.success('You are logged in')
+
+      if (isCheckingOut && !isAuthenticated) {
+        router.push('/checkout')
+
+        dispatch(checkoutActions.setIsCheckingOut(false))
+      } else {
+        router.push('/my-account/profile')
+      }
+
+      dispatch(authActions.setIsAuthenticated(true))
+
       dispatch(authActions.setRegUserName(data.user.displayName))
     } catch (error) {
       toast.error(error.message)
@@ -92,13 +114,13 @@ const MyAccount = () => {
     return <div>Error: {error}</div>
   }
 
-  if (user || isAuthenticated) {
+  if ((user || isAuthenticated) && !isCheckingOut) {
     router.push('/my-account/profile')
   }
 
   return (
     <div>
-      <h1 className='text-4xl font-bold mb-8 pt-12'>My Account</h1>
+      <h1 className='text-4xl font-bold mb-8 pt-12'>Krijoni nje llogari</h1>
 
       <div className='flex gap-10 justify-between flex-col sm:flex-row'>
         <div className='log-in flex-1'>

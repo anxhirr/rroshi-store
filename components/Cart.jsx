@@ -1,24 +1,27 @@
 import { useRef } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartActions } from '@/redux-store/cart-slice'
-import Link from 'next/link'
+import { checkoutActions } from '@/redux-store/checkout-slice'
 import { urlFor } from '@/lib/client'
+import { formatToLEK } from '@/lib/formatCurrency'
 
-import {
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiOutlineLeft,
-  AiOutlineShopping,
-} from 'react-icons/ai'
-import { RiDeleteBin6Line } from 'react-icons/ri'
 import { RedBtn } from './buttons'
+import QuantityBox from './QuantityBox'
+
+import { AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai'
+import { RiDeleteBin6Line } from 'react-icons/ri'
 
 const Cart = () => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const cartRef = useRef()
-  const { totalPrice, totalQuantity, cartItems } = useSelector(
+  const { subTotal, totalQuantity, cartItems } = useSelector(
     (state) => state.cart
   )
+
+  const { isAuthenticated } = useSelector((state) => state.auth)
 
   const handleCart = () => {
     dispatch(cartActions.toggleCart())
@@ -37,6 +40,15 @@ const Cart = () => {
 
   const handleCheckout = () => {
     dispatch(cartActions.toggleCart())
+    dispatch(checkoutActions.setIsCheckingOut(true))
+
+    if (isAuthenticated) {
+      router.push('/checkout')
+    }
+
+    if (!isAuthenticated) {
+      router.push('/my-account')
+    }
   }
 
   return (
@@ -62,9 +74,6 @@ const Cart = () => {
                 buttonText='Shiko produkte të tjera'
                 className='mt-5'
               />
-              {/* <button type='button' className='btn' onClick={handleCart}>
-                Shiko produkte të tjera
-              </button> */}
             </Link>
           </div>
         )}
@@ -73,36 +82,37 @@ const Cart = () => {
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className='flex gap-6 mb-5' key={item._id}>
-                <img
-                  src={urlFor(item?.image[0])}
-                  alt='cart item'
-                  className='h-44 w-44 rounded-md bg-milk'
-                />
-                <div className='flex w-80 flex-col justify-between'>
+                <Link
+                  href={`/product/${item.slug.current}`}
+                  onClick={handleCart}
+                >
+                  <img
+                    src={urlFor(item?.image[0])}
+                    alt='cart item'
+                    className='h-44 w-44 rounded-md bg-milk hover:bg-red-600 cursor-pointer'
+                  />
+                </Link>
+                <div className='flex w-80 flex-col justify-between font-bold'>
                   <div className='flex items-center justify-between '>
-                    <h5>{item.name}</h5>
-                    <h4 className='font-bold'>{item.price} LEK</h4>
+                    <h5 className='text-2xl'>{item.name}</h5>
+                    <h4 className='font-bold'>{formatToLEK(item.price)}</h4>
                   </div>
+
+                  <div className='flex items-center justify-between'>
+                    <h5 className='text-md font-bold'>
+                      <span>Total: </span>
+                      <span className='text-red-500'>
+                        {formatToLEK(item.price * item.quantity)}
+                      </span>
+                    </h5>
+                  </div>
+
                   <div className='flex justify-between '>
-                    <div>
-                      <p className='quantity-desc border p-2 px-4 border-gray-500 flex items-center max-w-min gap-2'>
-                        <span
-                          className='cursor-pointer '
-                          onClick={() => handleDecQuantity(item._id)}
-                        >
-                          <AiOutlineMinus className='text-red-600' />
-                        </span>
-                        <span className='px-2 border-x border-gray-500 font-bold text-lg font-monospace'>
-                          {item.quantity}
-                        </span>
-                        <span
-                          className='plus cursor-pointer'
-                          onClick={() => handleIncQuantity(item._id)}
-                        >
-                          <AiOutlinePlus className='text-green-600' />
-                        </span>
-                      </p>
-                    </div>
+                    <QuantityBox
+                      handleMinus={() => handleDecQuantity(item._id)}
+                      quantity={item.quantity}
+                      handlePlus={() => handleIncQuantity(item._id)}
+                    />
                     <button
                       type='button'
                       className='remove-item'
@@ -123,16 +133,14 @@ const Cart = () => {
                 ( {totalQuantity}
                 {totalQuantity > 1 ? ' Items' : ' Item'} )
               </h3>
-              <h3>{totalPrice} LEK</h3>
+              <h3>{formatToLEK(subTotal)}</h3>
             </div>
             <div className='btn-container'>
-              <Link href='/checkout'>
-                <RedBtn
-                  onClick={handleCheckout}
-                  buttonText='Checkout'
-                  className=' w-full text-2xl mt-4'
-                />
-              </Link>
+              <RedBtn
+                onClick={handleCheckout}
+                buttonText='Checkout'
+                className=' w-full text-2xl mt-4'
+              />
             </div>
           </div>
         )}

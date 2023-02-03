@@ -25,7 +25,7 @@ const Profile = () => {
     <div className='flex flex-col gap-6 items-center'>
       <h1 className='text-6xl'>Profile Page</h1>
 
-      <h2 className='text-2xl'>Wellcome {regUserName}</h2>
+      <h2 className='text-2xl'>Welcome {regUserName}</h2>
 
       <RedBtn buttonText='Log out' onClick={handleLogOut} />
     </div>

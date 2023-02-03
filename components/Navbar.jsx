@@ -9,6 +9,7 @@ import { Cart } from '.'
 const Navbar = () => {
   const dispatch = useDispatch()
   const { showCart, totalQuantity } = useSelector((state) => state.cart)
+  const { isAuthenticated } = useSelector((state) => state.auth)
 
   const handleCart = () => {
     dispatch(cartActions.toggleCart())
@@ -23,7 +24,7 @@ const Navbar = () => {
 
       <div className='flex gap-6 items-center'>
         <Link
-          href='/my-account'
+          href={isAuthenticated ? '/my-account/profile' : '/my-account'}
           className='text-2xl cursor-pointer duration-150  hover:scale-110'
         >
           <RiAccountCircleLine />

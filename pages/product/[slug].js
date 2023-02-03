@@ -4,14 +4,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { cartActions } from '@/redux-store/cart-slice'
 
 import Product from '../../components/Product'
-import {
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiFillStar,
-  AiOutlineStar,
-} from 'react-icons/ai'
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import Link from 'next/link'
 import { AlternativeBtn, DefaultBtn } from '@/components/buttons'
+import QuantityBox from '@/components/QuantityBox'
+import { formatToLEK } from '@/lib/formatCurrency'
 
 const ProductDetails = ({ product, products }) => {
   const dispatch = useDispatch()
@@ -74,23 +71,18 @@ const ProductDetails = ({ product, products }) => {
           <div className='mt-5'>
             <h4 className='font-medium'>Cmimi</h4>
             <p>
-              <span className='text-red-500 font-bold text-2xl'>{price}</span>
-              <span className='font-medium text-lg'> LEK</span>
+              <span className='text-red-500 font-bold text-2xl'>
+                {formatToLEK(price)}
+              </span>
             </p>
           </div>
           <div className='quantity '>
             <h3 className='font-medium'>Quantity:</h3>
-            <p className='quantity-desc border p-3 px-5 border-gray-500 flex items-center max-w-min gap-2'>
-              <span className='cursor-pointer' onClick={handleMinus}>
-                <AiOutlineMinus className='text-red-600' />
-              </span>
-              <span className='px-2 border-x border-gray-500 font-bold text-lg font-monospace'>
-                {quantity}
-              </span>
-              <span className='cursor-pointer' onClick={handlePlus}>
-                <AiOutlinePlus className='text-green-600' />
-              </span>
-            </p>
+            <QuantityBox
+              handleMinus={handleMinus}
+              handlePlus={handlePlus}
+              quantity={quantity}
+            />
           </div>
           <div className='flex gap-5 mt-8'>
             <AlternativeBtn

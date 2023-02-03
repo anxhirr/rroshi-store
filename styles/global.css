@@ -231,37 +231,6 @@ span.text-red {
   width: 100%;
 }
 
-/* .banner-desc button {
-  border-radius: 15px;
-  padding: 10px 16px;
-  background-color: white;
-  color: red;
-  border: none;
-  margin-top: 40px;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-} */
-
-.banner-desc .left h3 {
-  font-weight: 900;
-  font-size: 80px;
-  margin-left: 25px;
-}
-.banner-desc .left p {
-  margin: 18px;
-}
-.banner-desc .right {
-  line-height: 1.4;
-}
-
-.banner-desc .right p {
-  font-size: 18px;
-}
-.banner-desc .right .company-desc {
-  font-size: 14px;
-  font-weight: 300;
-}
 .cart-wrapper {
   width: 100%;
   height: 100%;
@@ -320,12 +289,6 @@ span.text-red {
   justify-content: space-between;
   width: 350px;
   color: rgb(50, 77, 103);
-}
-.flex h5 {
-  font-size: 24px;
-}
-.flex h4 {
-  font-size: 20px;
 }
 .total {
   display: flex;
@@ -627,7 +590,7 @@ span.text-red {
     gap: 10px;
   }
   .flex h5 {
-    font-size: 16px;
+    /* font-size: 16px; */
     color: #324d67;
   }
   .flex h4 {

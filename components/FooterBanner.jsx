@@ -19,11 +19,13 @@ const FooterBanner = ({ footerBanner }) => {
 
   return (
     <div className='footer-banner-container mt-32'>
-      <div className='banner-desc flex justify-between px-8'>
-        <div className='left pt-12 pb-8'>
+      <div className='flex justify-between px-8'>
+        <div className='pt-12 pb-8'>
           <p>{discount}</p>
-          <h3>{largeText1}</h3>
-          <h3>{largeText2}</h3>
+          <h3 className='ml-2 font-black text-7xl leading-snug '>
+            <div>{largeText1}</div>
+            <div>{largeText2}</div>
+          </h3>
           <p>{saleTime}</p>
         </div>
         <div className='w-fit max-w-md min-w-min'>
@@ -34,9 +36,9 @@ const FooterBanner = ({ footerBanner }) => {
           />
         </div>
 
-        <div className='right pt-12 pb-8 max-w-sm'>
+        <div className='pt-12 pb-8 max-w-sm'>
           <p>{smallText}</p>
-          <h3 className='font-extrabold text-6xl'>{midText}</h3>
+          <h3 className='font-extrabold text-6xl leading-snug'>{midText}</h3>
           <p>{desc}</p>
           <Link href={`product/${product}`}>
             <WhiteBtn buttonText={buttonText} className='mt-6' />

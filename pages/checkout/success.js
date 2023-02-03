@@ -4,7 +4,7 @@ import { BsBagCheckFill } from 'react-icons/bs'
 
 import { runFireWorks } from '@/lib/utils'
 
-const Succes = () => {
+const Success = () => {
   useEffect(() => {
     runFireWorks()
   }, [])
@@ -32,4 +32,4 @@ const Succes = () => {
     </div>
   )
 }
-export default Succes
+export default Success

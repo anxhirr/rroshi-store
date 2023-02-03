@@ -5,7 +5,7 @@ import { toast } from 'react-hot-toast'
 const initialCartState = {
   showCart: false,
   cartItems: [],
-  totalPrice: 0,
+  subTotal: 0,
   totalQuantity: 0,
   quantity: 1,
 }
@@ -31,7 +31,7 @@ const cartSlice = createSlice({
       )
       state.cartItems[foundItemIndex].quantity++
       state.totalQuantity++
-      state.totalPrice += state.cartItems[foundItemIndex].price
+      state.subTotal += state.cartItems[foundItemIndex].price
 
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
       if (state.cartItems[foundItemIndex].quantity === 1) return
       state.cartItems[foundItemIndex].quantity--
       state.totalQuantity--
-      state.totalPrice -= state.cartItems[foundItemIndex].price
+      state.subTotal -= state.cartItems[foundItemIndex].price
 
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
@@ -53,7 +53,7 @@ const cartSlice = createSlice({
       const newItem = action.payload
 
       state.totalQuantity += state.quantity
-      state.totalPrice += newItem.price * state.quantity
+      state.subTotal += newItem.price * state.quantity
 
       const existingItemIndex = state.cartItems.findIndex(
         (item) => item._id === newItem._id
@@ -75,7 +75,7 @@ const cartSlice = createSlice({
       const foundItem = state.cartItems.find((item) => item._id === id)
 
       state.totalQuantity -= foundItem.quantity
-      state.totalPrice -= foundItem.price
+      state.subTotal -= foundItem.price
 
       state.cartItems = state.cartItems.filter((item) => item._id !== id)
 
