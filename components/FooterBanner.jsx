@@ -19,7 +19,7 @@ const FooterBanner = ({ footerBanner }) => {
 
   return (
     <div className='footer-banner-container mt-32'>
-      <div className='flex justify-between px-8'>
+      <div className='flex flex-col md:flex-row justify-between px-8'>
         <div className='pt-12 pb-8'>
           <p>{discount}</p>
           <h3 className='ml-2 font-black text-7xl leading-snug '>

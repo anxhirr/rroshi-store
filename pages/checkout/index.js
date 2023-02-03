@@ -36,7 +36,7 @@ const Checkout = () => {
     <div>
       <h1 className='text-4xl font-bold mb-8 pt-12'>Checkout</h1>
 
-      <div className='flex gap-12'>
+      <div className='flex flex-col md:flex-row gap-12'>
         <div className='flex-1'>
           <h2 className='text-2xl font-medium mb-6'>Detajet e faturimit</h2>
           <form className='flex-1'>
