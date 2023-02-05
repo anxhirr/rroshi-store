@@ -69,11 +69,9 @@ const Cart = () => {
             <AiOutlineShopping size={150} className='m-auto' />
             <h3>Shporta juaj është bosh</h3>
             <Link href='/'>
-              <RedBtn
-                onClick={handleCart}
-                buttonText='Shiko produkte të tjera'
-                className='mt-5'
-              />
+              <RedBtn onClick={handleCart} className='mt-5'>
+                Shiko produkte të tjera
+              </RedBtn>
             </Link>
           </div>
         )}
@@ -138,9 +136,10 @@ const Cart = () => {
             <div className='btn-container'>
               <RedBtn
                 onClick={handleCheckout}
-                buttonText='Checkout'
                 className=' w-full text-2xl mt-4'
-              />
+              >
+                Checkout
+              </RedBtn>
             </div>
           </div>
         )}

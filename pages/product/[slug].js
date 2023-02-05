@@ -85,13 +85,11 @@ const ProductDetails = ({ product, products }) => {
             />
           </div>
           <div className='flex gap-5 mt-8'>
-            <AlternativeBtn
-              buttonText='Shto në Shportë'
-              className=''
-              onClick={() => onAddToCart(product, quantity)}
-            />
+            <AlternativeBtn onClick={() => onAddToCart(product, quantity)}>
+              Shto në Shportë
+            </AlternativeBtn>
             <Link href='/checkout'>
-              <DefaultBtn buttonText='Porosit Tani' />
+              <DefaultBtn>Porosit Tani</DefaultBtn>
             </Link>
           </div>
         </div>

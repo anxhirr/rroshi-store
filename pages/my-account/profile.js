@@ -27,7 +27,7 @@ const Profile = () => {
 
       <h2 className='text-2xl'>Welcome {regUserName}</h2>
 
-      <RedBtn buttonText='Log out' onClick={handleLogOut} />
+      <RedBtn onClick={handleLogOut}>Log out</RedBtn>
     </div>
   )
 }

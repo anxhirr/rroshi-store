@@ -151,10 +151,9 @@ const MyAccount = () => {
               />
 
               <div className='flex gap-6 items-center'>
-                <PurpleToBlueBtn
-                  onClick={handleLoginAndSignUp}
-                  buttonText='Hyr'
-                />
+                <PurpleToBlueBtn onClick={handleLoginAndSignUp}>
+                  Hyr
+                </PurpleToBlueBtn>
 
                 <Link
                   href='/my-account/forgot-password'
@@ -228,10 +227,9 @@ const MyAccount = () => {
               </p>
 
               <div>
-                <GreenToBlueBtn
-                  buttonText='Rregjistrohuni'
-                  onClick={handleLoginAndSignUp}
-                />
+                <GreenToBlueBtn onClick={handleLoginAndSignUp}>
+                  Rregjistrohuni
+                </GreenToBlueBtn>
               </div>
             </div>
           </form>

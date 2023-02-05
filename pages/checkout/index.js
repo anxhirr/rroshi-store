@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { checkoutActions } from '@/redux-store/checkout-slice'
@@ -144,7 +142,7 @@ const Checkout = () => {
             </div>
           </div>
 
-          <RedBtn buttonText='Fillo Dërgesën' onClick={handleSubmit} />
+          <RedBtn onClick={handleSubmit}>Fillo Dërgesën</RedBtn>
         </div>
       </div>
     </div>

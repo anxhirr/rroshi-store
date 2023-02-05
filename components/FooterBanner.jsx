@@ -41,7 +41,7 @@ const FooterBanner = ({ footerBanner }) => {
           <h3 className='font-extrabold text-6xl leading-snug'>{midText}</h3>
           <p>{desc}</p>
           <Link href={`product/${product}`}>
-            <WhiteBtn buttonText={buttonText} className='mt-6' />
+            <WhiteBtn className='mt-6'>{buttonText}</WhiteBtn>
           </Link>
         </div>
       </div>

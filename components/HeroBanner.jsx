@@ -6,28 +6,23 @@ import { RedBtn } from './buttons'
 const HeroBanner = ({ heroBanner }) => {
   return (
     <>
-      <div className='hero-banner-container'>
-        <div>
+      <div className='bg-milk rounded-3xl px-6 text-lg flex flex-col md:flex-row md:items-center'>
+        <div className='md:py-20 pt-20 md:self-start'>
           <p className='beats-solo'>{heroBanner.smallText}</p>
-          <h3>{heroBanner.midText}</h3>
+          <h3 className='text-6xl font-normal md:text-7xl'>
+            {heroBanner.midText}
+          </h3>
           <h1>{heroBanner.largeText}</h1>
-          <img
-            src={urlFor(heroBanner.image)}
-            alt='headphones'
-            className='hero-banner-image'
-          />
-          <div>
-            <Link href={`/product/${heroBanner.product}`}>
-              <RedBtn
-                buttonText={heroBanner.buttonText}
-                className='mt-12 leading-5'
-              />
-            </Link>
-            <div className='desc'>
-              <h5>Përshkrimi</h5>
-              <p>{heroBanner.desc}</p>
-            </div>
-          </div>
+          <Link href={`/product/${heroBanner.product}`}>
+            <RedBtn className='mt-8 leading-5'>{heroBanner.buttonText}</RedBtn>
+          </Link>
+        </div>
+        <div>
+          <img src={urlFor(heroBanner.image)} alt='headphones' />
+        </div>
+        <div className='z-50 pb-10 self-end text-txt'>
+          <h5>Përshkrimi</h5>
+          <p className='text-gray-500'>{heroBanner.desc}</p>
         </div>
       </div>
     </>

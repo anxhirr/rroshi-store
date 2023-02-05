@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         milk: '#DCDCDC',
+        txt: '#324d67',
       },
     },
     fontFamily: {
