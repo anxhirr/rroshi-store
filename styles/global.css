@@ -24,40 +24,10 @@ a {
 
 .main-container {
   --max-width: 80rem;
-  --padding: 0.3rem;
+  --padding: 0.6rem;
 
   margin-inline: auto;
   width: min(var(--max-width), 100% - var(--padding) * 2);
-}
-
-.button {
-  border-radius: 1rem;
-  padding: 0.7rem 1.5rem;
-  border: none;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-
-  transition: all 0.2s ease-in-out;
-}
-
-.button:hover {
-  scale: 1.05;
-  transform: translateY(-4px);
-}
-
-.button.white {
-  background-color: white;
-  color: red;
-}
-
-.button.red {
-  background-color: red;
-  color: white;
-}
-
-.layout {
-  padding: 0.625rem;
 }
 
 .marquee-text {

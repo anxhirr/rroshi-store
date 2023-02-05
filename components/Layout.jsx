@@ -3,12 +3,12 @@ import { Footer, Navbar } from '.'
 
 const Layout = ({ children }) => {
   return (
-    <div className='layout'>
+    <>
       <Head>
         <title>Rroshi Store </title>
       </Head>
 
-      <header>
+      <header className='main-container'>
         <Navbar />
       </header>
 
@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
           <Footer />
         </footer>
       </main>
-    </div>
+    </>
   )
 }
 export default Layout

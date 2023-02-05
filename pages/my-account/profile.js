@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
-import { useDispatch } from 'react-redux'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { initFirebase } from '@/firebase/firebaseApp'
 import { getAuth } from 'firebase/auth'
 import { authActions } from '@/redux-store/auth-slice'
 import { RedBtn } from '@/components/buttons'
+import { toast } from 'react-hot-toast'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -12,14 +13,15 @@ const Profile = () => {
   initFirebase()
   const auth = getAuth()
 
-  const { regUserName, regEmail, regPassword } = useSelector(
-    (state) => state.auth
-  )
+  console.log('auth', auth)
+
+  const { regUserName } = useSelector((state) => state.auth)
 
   const handleLogOut = () => {
     auth.signOut()
     router.push('/my-account')
     dispatch(authActions.setIsAuthenticated(false))
+    toast.success('You have been logged out')
   }
   return (
     <div className='flex flex-col gap-6 items-center'>

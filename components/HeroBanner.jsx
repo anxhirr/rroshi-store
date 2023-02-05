@@ -6,8 +6,8 @@ import { RedBtn } from './buttons'
 const HeroBanner = ({ heroBanner }) => {
   return (
     <>
-      <div className='bg-milk rounded-3xl px-6 text-lg flex flex-col md:flex-row md:items-center'>
-        <div className='md:py-20 pt-20 md:self-start'>
+      <div className='bg-milk rounded-3xl px-6 text-lg flex flex-col md:flex-row md:justify-between'>
+        <div className='md:py-20 md:pl-6 pt-6 md:self-start'>
           <p className='beats-solo'>{heroBanner.smallText}</p>
           <h3 className='text-6xl font-normal md:text-7xl'>
             {heroBanner.midText}
