@@ -8,6 +8,7 @@ import { collection, doc, getDocs } from 'firebase/firestore'
 import { authActions } from '@/redux-store/auth-slice'
 import { RedBtn } from '@/components/buttons'
 import { toast } from 'react-hot-toast'
+import Cookies from 'js-cookie'
 
 const Profile = () => {
   const dispatch = useDispatch()
@@ -17,14 +18,10 @@ const Profile = () => {
   initFirebase()
   const auth = getAuth()
 
-  console.log(userUID)
-
   useEffect(() => {
     const ordersCollectionRef = collection(db, 'users', userUID, 'orders')
     const getOrders = async () => {
       const orderCollection = await getDocs(ordersCollectionRef)
-
-      console.log(orderCollection)
 
       setOrders(
         orderCollection.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
@@ -32,12 +29,14 @@ const Profile = () => {
     }
 
     getOrders()
-  }, [userUID])
+  }, [])
 
   const handleLogOut = () => {
     auth.signOut()
     router.push('/my-account')
-    dispatch(authActions.setIsAuthenticated(false))
+
+    Cookies.remove('userUID')
+    dispatch(authActions.setUserUID(null))
     toast.success('You have been logged out')
   }
 

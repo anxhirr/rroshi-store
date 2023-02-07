@@ -20,7 +20,7 @@ const Cart = () => {
     (state) => state.cart
   )
 
-  const { isAuthenticated } = useSelector((state) => state.auth)
+  const { userUID } = useSelector((state) => state.auth)
 
   const handleCart = () => {
     dispatch(cartActions.toggleCart())
@@ -41,11 +41,11 @@ const Cart = () => {
     dispatch(cartActions.toggleCart())
     dispatch(cartActions.setIsCheckingOut(true))
 
-    if (isAuthenticated) {
+    if (userUID) {
       router.push('/checkout')
     }
 
-    if (!isAuthenticated) {
+    if (!userUID) {
       router.push('/my-account')
     }
   }

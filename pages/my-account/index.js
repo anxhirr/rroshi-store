@@ -8,8 +8,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  updateProfile,
 } from 'firebase/auth'
+import cookie from 'js-cookie'
 
 import { FcGoogle } from 'react-icons/fc'
 import { authActions } from '@/redux-store/auth-slice'
@@ -26,7 +26,7 @@ const MyAccount = () => {
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
 
-  const { isAuthenticated, userUID } = useSelector((state) => state.auth)
+  const { userUID } = useSelector((state) => state.auth)
   const { isCheckingOut } = useSelector((state) => state.cart)
   const [regUserName, setRegUserName] = useState('')
   const [regEmail, setRegEmail] = useState('')
@@ -36,10 +36,9 @@ const MyAccount = () => {
 
   const afterSuccessfulAuth = (user) => {
     toast.success('You are logged in')
-    dispatch(authActions.setIsAuthenticated(true))
-    dispatch(authActions.setUserUID(user.uid))
 
-    console.log(userUID)
+    cookie.set('userUID', user.uid, { expires: 1 / 24 })
+    dispatch(authActions.setUserUID(user.uid))
 
     if (isCheckingOut) {
       return router.push('/checkout')
@@ -120,7 +119,7 @@ const MyAccount = () => {
     }
   }
 
-  if (isAuthenticated) {
+  if (userUID) {
     router.push('/my-account/profile')
   }
 
