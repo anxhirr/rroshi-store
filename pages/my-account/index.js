@@ -1,17 +1,23 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { initFirebase } from '@/firebase/firebaseApp'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth'
 
 import { FcGoogle } from 'react-icons/fc'
 import { authActions } from '@/redux-store/auth-slice'
-import { checkoutActions } from '@/redux-store/checkout-slice'
 import { toast } from 'react-hot-toast'
 import Link from 'next/link'
 import { GreenToBlueBtn, PurpleToBlueBtn } from '@/components/buttons'
-
-const API_KEY = 'AIzaSyCT_v-TDTTBEZIDY6vPFeOGQf1W9jVMyQ4'
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from '@/firebase/firebaseApp'
 
 const MyAccount = () => {
   const dispatch = useDispatch()
@@ -19,66 +25,77 @@ const MyAccount = () => {
   initFirebase()
   const provider = new GoogleAuthProvider()
   const auth = getAuth()
-  const [user, loading, error] = useAuthState(auth)
 
-  const { isAuthenticated, regEmail, regPassword, email, password } =
-    useSelector((state) => state.auth)
+  const { isAuthenticated, userUID } = useSelector((state) => state.auth)
+  const { isCheckingOut } = useSelector((state) => state.cart)
+  const [regUserName, setRegUserName] = useState('')
+  const [regEmail, setRegEmail] = useState('')
+  const [regPassword, setRegPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const { isCheckingOut } = useSelector((state) => state.checkout)
+  const afterSuccessfulAuth = (user) => {
+    toast.success('You are logged in')
+    dispatch(authActions.setIsAuthenticated(true))
+    dispatch(authActions.setUserUID(user.uid))
 
-  const handleLoginAndSignUp = async (e) => {
-    e.preventDefault()
-    let isLogIn = false
+    console.log(userUID)
 
-    if (e.target.innerHTML === 'Hyr') {
-      isLogIn = true
+    if (isCheckingOut) {
+      return router.push('/checkout')
     }
 
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:${
-      isLogIn ? 'signInWithPassword' : 'signUp'
-    }?key=${API_KEY}`
+    router.replace('/my-account/profile')
+  }
 
+  const createNewUserObj = (user) => {
+    console.log(user)
+    const newUserObj = {
+      email: user.email,
+      name: user.displayName || regUserName,
+    }
+    return newUserObj
+  }
+
+  const handleSignUp = async (e) => {
+    e.preventDefault()
     try {
-      const res = await fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          email: isLogIn ? email : regEmail,
-          password: isLogIn ? password : regPassword,
-          returnSecureToken: true,
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
+      const data = await createUserWithEmailAndPassword(
+        auth,
+        regEmail,
+        regPassword
+      )
+      const user = data.user
 
-      const data = await res.json()
-
-      if (!res.ok) {
-        throw new Error(data.error.message || 'Something went wrong')
+      if (!user) {
+        toast.error('Something went wrong')
+        throw new Error('Something went wrong')
       }
 
-      if (isLogIn) {
-        toast.success('You are logged in')
+      await setDoc(doc(db, 'users', user.uid), createNewUserObj(user))
 
-        if (isCheckingOut && !isAuthenticated) {
-          router.push('/checkout')
+      afterSuccessfulAuth(user)
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
-          dispatch(checkoutActions.setIsCheckingOut(false))
-        } else {
-          router.push('/my-account/profile')
-        }
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    try {
+      const data = await signInWithEmailAndPassword(auth, email, password)
+      const user = data.user
 
-        dispatch(authActions.setIsAuthenticated(true))
-
-        dispatch(authActions.setRegUserName(data.displayName))
-        dispatch(authActions.setEmail(''))
-        dispatch(authActions.setPassword(''))
-      } else {
-        toast.success('You are registered, now you can log in')
-        dispatch(authActions.setRegUserName(''))
-        dispatch(authActions.setRegEmail(''))
-        dispatch(authActions.setRegPassword(''))
+      if (!user) {
+        toast.error('Something went wrong')
+        throw new Error('Something went wrong')
       }
+
+      await setDoc(doc(db, 'users', user.uid), createNewUserObj(user))
+
+      console.log(user)
+
+      afterSuccessfulAuth(user)
     } catch (error) {
       toast.error(error.message)
     }
@@ -88,33 +105,22 @@ const MyAccount = () => {
     try {
       const data = await signInWithPopup(auth, provider)
 
-      toast.success('You are logged in')
+      const user = data.user
 
-      if (isCheckingOut && !isAuthenticated) {
-        router.push('/checkout')
-
-        dispatch(checkoutActions.setIsCheckingOut(false))
-      } else {
-        router.push('/my-account/profile')
+      if (!user) {
+        toast.error('Something went wrong')
+        throw new Error('Something went wrong')
       }
 
-      dispatch(authActions.setIsAuthenticated(true))
+      await setDoc(doc(db, 'users', user.uid), createNewUserObj(user))
 
-      dispatch(authActions.setRegUserName(data.user.displayName))
+      afterSuccessfulAuth(user)
     } catch (error) {
       toast.error(error.message)
     }
   }
 
-  if (loading) {
-    return <div>Loading...</div>
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>
-  }
-
-  if ((user || isAuthenticated) && !isCheckingOut) {
+  if (isAuthenticated) {
     router.push('/my-account/profile')
   }
 
@@ -132,7 +138,7 @@ const MyAccount = () => {
                 Emër përdoruesi ose email
               </label>
               <input
-                onChange={(e) => dispatch(authActions.setEmail(e.target.value))}
+                onChange={(e) => setEmail(e.target.value)}
                 type='email'
                 id='email'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
@@ -142,18 +148,14 @@ const MyAccount = () => {
                 Fjalëkalim
               </label>
               <input
-                onChange={(e) =>
-                  dispatch(authActions.setPassword(e.target.value))
-                }
+                onChange={(e) => setPassword(e.target.value)}
                 type='password'
                 id='password'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
               />
 
               <div className='flex gap-6 items-center'>
-                <PurpleToBlueBtn onClick={handleLoginAndSignUp}>
-                  Hyr
-                </PurpleToBlueBtn>
+                <PurpleToBlueBtn onClick={handleLogin}>Hyr</PurpleToBlueBtn>
 
                 <Link
                   href='/my-account/forgot-password'
@@ -189,9 +191,7 @@ const MyAccount = () => {
                 Emër përdoruesi
               </label>
               <input
-                onChange={(e) =>
-                  dispatch(authActions.setRegUserName(e.target.value))
-                }
+                onChange={(e) => setRegUserName(e.target.value)}
                 type='username'
                 id='usename'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
@@ -201,9 +201,7 @@ const MyAccount = () => {
                 Adresë email
               </label>
               <input
-                onChange={(e) =>
-                  dispatch(authActions.setRegEmail(e.target.value))
-                }
+                onChange={(e) => setRegEmail(e.target.value)}
                 type='email'
                 id='reg_email'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
@@ -213,9 +211,7 @@ const MyAccount = () => {
                 Fjalëkalim
               </label>
               <input
-                onChange={(e) =>
-                  dispatch(authActions.setRegPassword(e.target.value))
-                }
+                onChange={(e) => setRegPassword(e.target.value)}
                 type='password'
                 id='reg_password'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
@@ -227,7 +223,7 @@ const MyAccount = () => {
               </p>
 
               <div>
-                <GreenToBlueBtn onClick={handleLoginAndSignUp}>
+                <GreenToBlueBtn onClick={handleSignUp}>
                   Rregjistrohuni
                 </GreenToBlueBtn>
               </div>

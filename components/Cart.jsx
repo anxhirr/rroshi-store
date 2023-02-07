@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartActions } from '@/redux-store/cart-slice'
-import { checkoutActions } from '@/redux-store/checkout-slice'
 import { urlFor } from '@/lib/client'
 import { formatToLEK } from '@/lib/formatCurrency'
 
@@ -40,7 +39,7 @@ const Cart = () => {
 
   const handleCheckout = () => {
     dispatch(cartActions.toggleCart())
-    dispatch(checkoutActions.setIsCheckingOut(true))
+    dispatch(cartActions.setIsCheckingOut(true))
 
     if (isAuthenticated) {
       router.push('/checkout')

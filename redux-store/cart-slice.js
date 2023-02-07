@@ -2,12 +2,18 @@ import { createSlice } from '@reduxjs/toolkit'
 
 import { toast } from 'react-hot-toast'
 
+const localItems =
+  typeof window !== 'undefined' && localStorage.getItem('cart-items')
+    ? JSON.parse(localStorage.getItem('cart-items'))
+    : []
+
 const initialCartState = {
   showCart: false,
-  cartItems: [],
+  cartItems: localItems,
   subTotal: 0,
   totalQuantity: 0,
   quantity: 1,
+  isCheckingOut: false,
 }
 
 const cartSlice = createSlice({
@@ -32,8 +38,6 @@ const cartSlice = createSlice({
       state.cartItems[foundItemIndex].quantity++
       state.totalQuantity++
       state.subTotal += state.cartItems[foundItemIndex].price
-
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     decCartItemQuantity(state, action) {
       const id = action.payload
@@ -45,8 +49,6 @@ const cartSlice = createSlice({
       state.cartItems[foundItemIndex].quantity--
       state.totalQuantity--
       state.subTotal -= state.cartItems[foundItemIndex].price
-
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
 
     addItemToCart(state, action) {
@@ -67,8 +69,6 @@ const cartSlice = createSlice({
       }
 
       toast.success(`${state.quantity} ${newItem.name} added to the cart.`)
-
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     removeItemFromCart(state, action) {
       const id = action.payload
@@ -80,8 +80,9 @@ const cartSlice = createSlice({
       state.cartItems = state.cartItems.filter((item) => item._id !== id)
 
       toast.success(`${foundItem.name} removed from the cart.`)
-
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
+    },
+    setIsCheckingOut(state, action) {
+      state.isCheckingOut = action.payload
     },
   },
 })

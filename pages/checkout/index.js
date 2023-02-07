@@ -1,19 +1,23 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useDispatch, useSelector } from 'react-redux'
-import { checkoutActions } from '@/redux-store/checkout-slice'
+import { useSelector } from 'react-redux'
 
 import { RedBtn } from '@/components/buttons'
 import { formatToLEK } from '@/lib/formatCurrency'
 import { toast } from 'react-hot-toast'
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from '@/firebase/firebaseApp'
 
 const Checkout = () => {
   const router = useRouter()
-  const dispatch = useDispatch()
   const { cartItems, subTotal } = useSelector((state) => state.cart)
+  const { userUID } = useSelector((state) => state.auth)
+  console.log(userUID)
 
-  const { phone, address, city, zip } = useSelector((state) => state.checkout)
-
-  console.log(phone, address, city, zip)
+  const [phone, setPhone] = useState('')
+  const [address, setAddress] = useState('')
+  const [city, setCity] = useState('')
+  const [zip, setZip] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,11 +27,29 @@ const Checkout = () => {
       return
     }
 
+    const createOrder = async () => {
+      const order = {
+        items: cartItems,
+        date: new Date().toLocaleDateString(),
+        total: subTotal + 300,
+        status: 'pending',
+        phone,
+        address,
+        city,
+        zip,
+      }
+      const userOrdersCollection = collection(db, 'users', userUID, 'orders')
+
+      await addDoc(userOrdersCollection, order)
+    }
+    createOrder()
+
     router.push('/checkout/success')
-    dispatch(checkoutActions.setPhone(''))
-    dispatch(checkoutActions.setAddress(''))
-    dispatch(checkoutActions.setCity(''))
-    dispatch(checkoutActions.setZip(''))
+    toast.success('Porosia u krye me sukses')
+    setPhone('')
+    setAddress('')
+    setCity('')
+    setZip('')
   }
 
   return (
@@ -44,12 +66,9 @@ const Checkout = () => {
               </label>
               <input
                 type='text'
-                // ref={phoneRef}
                 id='phone'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
-                onChange={(e) =>
-                  dispatch(checkoutActions.setPhone(e.target.value))
-                }
+                onChange={(e) => setPhone(e.target.value)}
               />
               <label htmlFor='address' className='mb-1'>
                 Adresa *
@@ -58,10 +77,7 @@ const Checkout = () => {
                 type='text'
                 id='address'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
-                // ref={addressRef}
-                onChange={(e) =>
-                  dispatch(checkoutActions.setAddress(e.target.value))
-                }
+                onChange={(e) => setAddress(e.target.value)}
               />
               <label htmlFor='city' className='mb-1'>
                 Qyteti *
@@ -70,9 +86,7 @@ const Checkout = () => {
                 type='text'
                 id='city'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
-                onChange={(e) =>
-                  dispatch(checkoutActions.setCity(e.target.value))
-                }
+                onChange={(e) => setCity(e.target.value)}
               />
               <label htmlFor='zip' className='mb-1'>
                 ZIP/Kodi postar *
@@ -82,9 +96,7 @@ const Checkout = () => {
                 type='text'
                 id='zip'
                 className='mb-6 border-2 w-full h-10 rounded-md px-2'
-                onChange={(e) =>
-                  dispatch(checkoutActions.setZip(e.target.value))
-                }
+                onChange={(e) => setZip(e.target.value)}
               />
 
               <label htmlFor='message' className='mb-1'>

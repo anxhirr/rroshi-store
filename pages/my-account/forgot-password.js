@@ -66,10 +66,10 @@ const ForgotPassword = () => {
 
         {showBackToLogin ? (
           <Link href='/my-account' className='w-full'>
-            <RedBtn buttonText='Kthehu tek hyrja' className='w-full' />
+            <RedBtn className='w-full'>Kthehu tek hyrja</RedBtn>
           </Link>
         ) : (
-          <RedBtn buttonText='Dërgo' onClick={(e) => handleResetPassword(e)} />
+          <RedBtn onClick={(e) => handleResetPassword(e)}>Dërgo</RedBtn>
         )}
       </div>
     </div>
