@@ -16,7 +16,7 @@ const ProductDetails = ({ product, products }) => {
 
   const [index, setIndex] = useState(0)
 
-  const { quantity, cartItems } = useSelector((state) => state.cart)
+  const { quantity } = useSelector((state) => state.cart)
 
   const handleMinus = () => {
     dispatch(cartActions.decQuantity())
@@ -27,8 +27,6 @@ const ProductDetails = ({ product, products }) => {
 
   const onAddToCart = (product, quantity) => {
     dispatch(cartActions.addItemToCart({ ...product, quantity }))
-
-    console.log(cartItems)
   }
 
   return (

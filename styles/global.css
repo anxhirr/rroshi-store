@@ -203,6 +203,9 @@ span.text-red {
   right: 0;
   top: 0;
   z-index: 100;
+
+  display: flex;
+  justify-content: flex-end;
   /* will-change: transform; */
   /* transition: all 1s ease-in-out; */
 }

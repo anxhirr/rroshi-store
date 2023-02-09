@@ -75,7 +75,7 @@ const Cart = () => {
           </div>
         )}
 
-        <div className='product-container'>
+        <div className='py-5 px-2'>
           {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div className='flex gap-6 mb-5' key={item._id}>
@@ -86,10 +86,10 @@ const Cart = () => {
                   <img
                     src={urlFor(item?.image[0])}
                     alt='cart item'
-                    className='h-44 w-44 rounded-md bg-milk hover:bg-red-600 cursor-pointer'
+                    className='w-44 rounded-md bg-milk hover:bg-red-600 cursor-pointer'
                   />
                 </Link>
-                <div className='flex w-80 flex-col justify-between font-bold'>
+                <div className='flex w-72 flex-col justify-between font-bold'>
                   <div className='flex items-center justify-between '>
                     <h5 className='text-2xl'>{item.name}</h5>
                     <h4 className='font-bold'>{formatToLEK(item.price)}</h4>
