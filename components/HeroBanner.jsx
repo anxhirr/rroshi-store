@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
-import { urlFor } from '@/lib/client'
+import { urlFor } from '../lib/sanity.client'
 import { RedBtn } from './buttons'
+import Image from 'next/image'
 
 const HeroBanner = ({ heroBanner }) => {
   return (
@@ -18,7 +19,13 @@ const HeroBanner = ({ heroBanner }) => {
           </Link>
         </div>
         <div>
-          <img src={urlFor(heroBanner.image)} alt='headphones' />
+          <Image
+            src={urlFor(heroBanner.image).url()}
+            alt='hero-banner'
+            width={250}
+            height={250}
+            priority
+          />
         </div>
         <div className='z-50 pb-10 self-end text-txt'>
           <h5>Përshkrimi</h5>

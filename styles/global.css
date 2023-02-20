@@ -150,8 +150,8 @@ span.text-red {
   position: absolute;
   top: 0%;
   right: 20%;
-  width: 450px;
-  height: 450px;
+  /* width: 450px;
+  height: 450px; */
 }
 
 .desc {
@@ -245,8 +245,8 @@ span.text-red {
   padding: 20px;
 }
 .product .cart-product-image {
-  width: 180px;
-  height: 150px;
+  /* width: 180px;
+  height: 150px; */
   border-radius: 15px;
   background-color: #ebebeb;
 }
@@ -313,8 +313,8 @@ span.text-red {
   border-radius: 15px;
   background-color: #ebebeb;
 
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
 
   cursor: pointer;
   transition: 0.3s ease-in-out;
@@ -331,8 +331,8 @@ span.text-red {
 .small-image {
   border-radius: 8px;
   background-color: #ebebeb;
-  width: 70px;
-  height: 70px;
+  /* width: 70px;
+  height: 70px; */
   cursor: pointer;
 }
 
@@ -535,8 +535,8 @@ span.text-red {
     padding: 20px 5px;
   }
   .product .cart-product-image {
-    width: 25%;
-    height: 25%;
+    /* width: 25%;
+    height: 25%; */
   }
   .buttons .add-to-cart {
     width: 150px;
@@ -611,5 +611,11 @@ span.text-red {
 
   .banner-desc .left h3 {
     display: inline-block;
+  }
+}
+
+@layer components {
+  .input {
+    @apply mb-6 border-2 w-full h-10 rounded-md px-2;
   }
 }

@@ -1,26 +1,27 @@
-import { useRef } from 'react'
+'use client'
+
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartActions } from '@/redux-store/cart-slice'
-import { urlFor } from '@/lib/client'
-import { formatToLEK } from '@/lib/formatCurrency'
+import { cartActions } from '../redux-store/cart-slice'
+import { urlFor } from '../lib/sanity.client'
+import { formatToLEK } from '../lib/formatCurrency'
 
 import { RedBtn } from './buttons'
 import QuantityBox from './QuantityBox'
 
 import { AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai'
 import { RiDeleteBin6Line } from 'react-icons/ri'
+import Image from 'next/image'
+import { useSession } from 'next-auth/react'
 
 const Cart = () => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const cartRef = useRef()
+  const session = useSession()
   const { subTotal, totalQuantity, cartItems } = useSelector(
     (state) => state.cart
   )
-
-  const { userUID } = useSelector((state) => state.auth)
 
   const handleCart = () => {
     dispatch(cartActions.toggleCart())
@@ -41,17 +42,17 @@ const Cart = () => {
     dispatch(cartActions.toggleCart())
     dispatch(cartActions.setIsCheckingOut(true))
 
-    if (userUID) {
+    if (session) {
       router.push('/checkout')
     }
 
-    if (!userUID) {
-      router.push('/my-account')
+    if (!session) {
+      router.push('/account')
     }
   }
 
   return (
-    <div className='cart-wrapper' ref={cartRef}>
+    <div className='cart-wrapper'>
       <div className='float-right h-full bg-white relative py-4 px-2 '>
         <button
           type='button'
@@ -83,10 +84,12 @@ const Cart = () => {
                   href={`/product/${item.slug.current}`}
                   onClick={handleCart}
                 >
-                  <img
-                    src={urlFor(item?.image[0])}
+                  <Image
+                    src={urlFor(item?.image[0]).url()}
                     alt='cart item'
                     className='w-44 rounded-md bg-milk hover:bg-red-600 cursor-pointer'
+                    width={100}
+                    height={100}
                   />
                 </Link>
                 <div className='flex w-72 flex-col justify-between font-bold'>
@@ -123,7 +126,7 @@ const Cart = () => {
             ))}
         </div>
         {cartItems.length >= 1 && (
-          <div className='absolute bottom-4 right-0 w-full px-6'>
+          <div className='absolute bg-white bottom-4 right-0 w-full px-6'>
             <div className='total'>
               <h3>Subtotal</h3>
               <h3>
