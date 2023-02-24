@@ -202,7 +202,7 @@ span.text-red {
   right: 0;
   top: 0;
   z-index: 100;
-  padding: 20px 10px;
+  padding: 15px 10px;
   overflow: auto;
   will-change: transform;
   transition: all 0.5s ease-in-out;
@@ -514,10 +514,6 @@ span.text-red {
   }
   .product-detail-container {
     flex-wrap: wrap;
-  }
-  .cart-container {
-    /* width: 415px; */
-    padding: 4px;
   }
   .product-container {
     margin-top: 10px;

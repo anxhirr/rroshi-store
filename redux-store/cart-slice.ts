@@ -7,7 +7,6 @@ const initialCartState = {
   cartItems: [],
   subTotal: 0,
   totalQuantity: 0,
-  quantity: 1,
   isCheckingOut: false,
 }
 
@@ -17,13 +16,6 @@ const cartSlice = createSlice({
   reducers: {
     toggleCart(state) {
       state.showCart = !state.showCart
-    },
-    incQuantity(state) {
-      state.quantity++
-    },
-    decQuantity(state) {
-      if (state.quantity === 1) return
-      state.quantity--
     },
     incCartItemQuantity(state, action) {
       const id = action.payload
@@ -48,22 +40,23 @@ const cartSlice = createSlice({
 
     addItemToCart(state, action) {
       const newItem = action.payload
+      console.log(newItem)
 
-      state.totalQuantity += state.quantity
-      state.subTotal += newItem.price * state.quantity
+      state.totalQuantity += newItem.quantity
+      state.subTotal += newItem.price * newItem.quantity
 
       const existingItemIndex = state.cartItems.findIndex(
         (item) => item._id === newItem._id
       )
       if (existingItemIndex > -1) {
-        state.cartItems[existingItemIndex].quantity += state.quantity
+        state.cartItems[existingItemIndex].quantity += newItem.quantity
       }
       if (existingItemIndex === -1) {
         newItem.quantity = state.quantity
         state.cartItems.push(newItem)
       }
 
-      toast.success(`${state.quantity} ${newItem.name} added to the cart.`)
+      toast.success(`${newItem.quantity} ${newItem.name} added to the cart.`)
     },
     removeItemFromCart(state, action) {
       const id = action.payload
