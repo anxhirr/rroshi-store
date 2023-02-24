@@ -5,21 +5,23 @@ export const fetchBanner = async () => {
   const query = groq`
     *[_type == "banner"]
     `
-  const banner = await client.fetch(query)
-  return banner
+  return await client.fetch(query)
 }
 
 export const fetchProducts = async () => {
   const query = groq`
     *[_type == "product"]
     `
-  const products = await client.fetch(query)
-  return products
+  return await client.fetch(query)
 }
 
-type Slug = {
-  slug: string
+export const fetchLogo = async () => {
+  const query = groq`
+  *[_type == "logo"]
+  `
+  return await client.fetch(query)
 }
+type Slug = string
 
 export const fetchProduct = async (slug: Slug) => {
   const query = groq`
@@ -32,8 +34,5 @@ export const fetchProduct = async (slug: Slug) => {
   } catch (error) {
     console.log(error)
   }
-
-  // const product = await client.fetch(query)
-  // return product
 }
 export default fetchProduct

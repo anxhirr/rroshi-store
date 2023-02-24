@@ -1,5 +1,5 @@
-import ProductDetails from '../../../../components/ProductDetails'
-import MayLikeProducts from '../../../../components/MayLikeProducts'
+import ProductDetails from '../../../../components/products/ProductDetails'
+import MayLikeProducts from '../../../../components/products/MayLikeProducts'
 import { fetchProduct, fetchProducts } from '../../../../lib/fetchFromSanity'
 
 export const dynamic = 'force-static'

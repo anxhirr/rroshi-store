@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { urlFor } from '../lib/sanity.client'
-import { formatToLEK } from '../lib/formatCurrency'
+import { urlFor } from '../../lib/sanity.client'
+import { formatToLEK } from '../../lib/formatCurrency'
 
 const Product = ({ product }) => {
   const { image, name, slug, price } = product

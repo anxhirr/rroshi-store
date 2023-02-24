@@ -7,7 +7,7 @@ import {
 
 const Footer = () => {
   return (
-    <div className='footer-container'>
+    <div className='text-txt items-center justify-center gap-3 py-6 flex flex-col font-bold mt-auto'>
       <p>2023 Rroshi Store All rights reserved</p>
       <p className='icons flex gap-4 text-3xl'>
         <Link

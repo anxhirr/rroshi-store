@@ -27,7 +27,7 @@ const HeroBanner = ({ heroBanner }) => {
             priority
           />
         </div>
-        <div className='z-50 pb-10 self-end text-txt'>
+        <div className='pb-10 self-end text-txt'>
           <h5>Përshkrimi</h5>
           <p className='text-gray-500'>{heroBanner.desc}</p>
         </div>

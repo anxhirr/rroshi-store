@@ -3,15 +3,17 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-import { AlternativeBtn, DefaultBtn } from './buttons'
-import QuantityBox from './QuantityBox'
-import { urlFor } from '../lib/sanity.client'
-import { formatToLEK } from '../lib/formatCurrency'
+import { AlternativeBtn, DefaultBtn } from '../buttons'
+import QuantityBox from '../QuantityBox'
+import { urlFor } from '../../lib/sanity.client'
+import { formatToLEK } from '../../lib/formatCurrency'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
-import { cartActions } from '../redux-store/cart-slice'
+import { cartActions } from '../../redux-store/cart-slice'
+import { useRouter } from 'next/navigation'
 
 const ProductDetails = ({ product }) => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const [index, setIndex] = useState(0)
   const [quantity, setQuantity] = useState(1)
@@ -27,6 +29,11 @@ const ProductDetails = ({ product }) => {
 
   const onAddToCart = (product) => {
     dispatch(cartActions.addItemToCart({ ...product, quantity }))
+  }
+
+  const handleOrderNowClick = () => {
+    onAddToCart(product)
+    router.push('/checkout')
   }
 
   return (
@@ -90,9 +97,7 @@ const ProductDetails = ({ product }) => {
             <AlternativeBtn onClick={() => onAddToCart(product)}>
               Shto në Shportë
             </AlternativeBtn>
-            <Link href='/checkout'>
-              <DefaultBtn>Porosit Tani</DefaultBtn>
-            </Link>
+            <DefaultBtn onClick={handleOrderNowClick}>Porosit Tani</DefaultBtn>
           </div>
         </div>
       </div>

@@ -23,7 +23,8 @@ const ChartButton = () => {
         <AiOutlineShopping />
         <span className='cart-item-qty'>{totalQuantity}</span>
       </button>
-      {showCart && <Cart />}
+      {/* {showCart && <Cart />} */}
+      <Cart showCart={showCart} />
     </>
   )
 }

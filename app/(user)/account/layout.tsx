@@ -5,6 +5,8 @@ import Login from './LogIn'
 const AuthLayout = async ({ children }) => {
   const session = await getServerSession(authOptions)
 
-  return !session ? <Login /> : children
+  if (!session) return <Login />
+
+  return children
 }
 export default AuthLayout

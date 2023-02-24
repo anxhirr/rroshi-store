@@ -8,11 +8,11 @@ const Layout = ({ children }) => {
         <title>Rroshi Store </title>
       </Head>
 
-      <header className='main-container'>
+      <header>
         <Navbar />
       </header>
 
-      <main className='main-container'>
+      <main>
         {children}
         <footer>
           <Footer />

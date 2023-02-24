@@ -15,7 +15,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 
-const Cart = () => {
+const Cart = ({ showCart }) => {
   const router = useRouter()
   const dispatch = useDispatch()
   const session = useSession()
@@ -52,8 +52,16 @@ const Cart = () => {
   }
 
   return (
-    <div className='cart-wrapper'>
-      <div className='float-right h-full bg-white relative py-4 px-2 '>
+    <div
+      className={`w-full h-full fixed left-0 top-0 z-50 pointer-events-none transition-all duration-300 ${
+        showCart ? 'pointer-events-auto backdrop-blur-sm bg-black/30' : ''
+      }`}
+    >
+      <div
+        className={`cart-container min-w-min md:min-w-fit ${
+          showCart ? 'show' : ''
+        }`}
+      >
         <button
           type='button'
           className='flex items-center gap-2 text-xl font-medium'

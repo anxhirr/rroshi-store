@@ -12,14 +12,14 @@ export default async function RootLayout({ children }) {
     <html>
       <Head />
       <body>
-        <Providers session={session}>
-          {/* @ts-expect-error Server Component */}
-          <Navbar />
-          <main>
-            <div className='main-container'>{children}</div>
-          </main>
-          <Footer />
-        </Providers>
+        <div className='site main-container min-h-screen flex flex-col'>
+          <Providers session={session}>
+            {/* @ts-expect-error Server Component */}
+            <Navbar />
+            <main className='flex-grow'>{children}</main>
+            <Footer />
+          </Providers>
+        </div>
       </body>
     </html>
   )
