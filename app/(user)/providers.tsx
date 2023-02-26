@@ -9,10 +9,10 @@ import { persistor, store } from '../../redux-store/store'
 const Providers = ({ children, session }) => {
   return (
     <Provider store={store}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
-      <Toaster />
-      <SessionProvider session={session}>{children}</SessionProvider>
-      {/* </PersistGate> */}
+      <PersistGate loading={null} persistor={persistor}>
+        <Toaster />
+        <SessionProvider session={session}>{children}</SessionProvider>
+      </PersistGate>
     </Provider>
   )
 }
