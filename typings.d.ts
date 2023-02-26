@@ -1,4 +1,4 @@
-type CartItem = {
+export type CartItem = {
   details: string
   image: {}
   name: string
@@ -11,3 +11,19 @@ type CartItem = {
   _type: string
   _updated_at: string
 }
+
+// export type OrderDataType = {
+//   cartItems: CartItem[]
+//   userEmail: string
+//   address: string
+//   city: string
+//   telephone: string
+//   zip: string
+// }
+
+// export type OrderFormDataType = {
+//   address: string
+//   city: string
+//   telephone: string
+//   zip: string
+// }

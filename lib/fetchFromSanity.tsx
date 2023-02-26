@@ -49,3 +49,15 @@ export const fetchUser = async (email: string) => {
     console.log(error)
   }
 }
+export const fetchOrdersByEmail = async (email: string) => {
+  const query = groq`
+    *[_type == "order" && user.email == $userEmail]
+    `
+
+  try {
+    const user = await client.fetch(query)
+    return user
+  } catch (error) {
+    console.log(error)
+  }
+}

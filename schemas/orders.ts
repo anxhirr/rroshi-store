@@ -4,6 +4,16 @@ export const orders = {
   title: 'Order',
   fields: [
     {
+      name: 'user_email',
+      title: 'User Email',
+      type: 'string',
+    },
+    {
+      name: 'user',
+      type: 'reference',
+      to: [{ type: 'user' }],
+    },
+    {
       name: 'products',
       type: 'array',
       of: [
@@ -24,16 +34,33 @@ export const orders = {
       ],
     },
     {
-      name: 'user',
-      type: 'reference',
-      to: [{ type: 'user' }],
-    },
-    {
       name: 'created_at',
+      title: 'Created At',
       type: 'datetime',
       options: {
         readOnly: true,
       },
+    },
+    {
+      name: 'telephone',
+      title: 'Telephone',
+
+      type: 'string',
+    },
+    {
+      name: 'address',
+      title: 'Address',
+      type: 'string',
+    },
+    {
+      name: 'city',
+      title: 'City',
+      type: 'string',
+    },
+    {
+      name: 'zip',
+      title: 'ZIP',
+      type: 'string',
     },
   ],
 }

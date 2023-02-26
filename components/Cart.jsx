@@ -18,7 +18,7 @@ import { useSession } from 'next-auth/react'
 const Cart = ({ showCart }) => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const session = useSession()
+  const { data: user, status } = useSession()
   const { subTotal, totalQuantity, cartItems } = useSelector(
     (state) => state.cart
   )
@@ -42,11 +42,11 @@ const Cart = ({ showCart }) => {
     dispatch(cartActions.toggleCart())
     dispatch(cartActions.setIsCheckingOut(true))
 
-    if (session) {
+    if (user) {
       router.push('/checkout')
     }
 
-    if (!session) {
+    if (!user) {
       router.push('/account')
     }
   }

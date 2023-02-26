@@ -2,20 +2,17 @@ import { createOrderInSanity } from '../../lib/createInSanity'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return
-  const { userEmail, cartItems } = req.body
 
   const order = {
-    userEmail,
-    cartItems,
-    createdAt: new Date().toISOString(),
+    ...req.body,
   }
 
   console.log('order', order)
 
   try {
     await createOrderInSanity(order)
-    res.status(200).json({ message: 'Order created' })
+    res.status(200).json({ message: 'Porosia u dërgua me sukses!' })
   } catch (error) {
-    res.status(500).json({ message: 'Error creating order' })
+    res.status(500).json({ message: 'Probleme me krijimin e porosisë' })
   }
 }

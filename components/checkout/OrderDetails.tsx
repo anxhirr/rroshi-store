@@ -3,7 +3,6 @@
 import { useSelector } from 'react-redux'
 import { formatToLEK } from '../../lib/formatCurrency'
 import { RootState } from '../../redux-store/store'
-import SendOrderButton from './SendOrderButton'
 
 const OrderDetails = () => {
   const { cartItems, subTotal } = useSelector((state: RootState) => state.cart)
@@ -50,7 +49,7 @@ const OrderDetails = () => {
           <p className='text-red-600 '>{formatToLEK(subTotal + 300)}</p>
         </div>
       </div>
-      <SendOrderButton />
+      {/* <SendOrderButton /> */}
     </div>
   )
 }

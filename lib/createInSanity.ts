@@ -33,13 +33,9 @@ export const createUserInSanity = async (user: User) => {
 }
 
 export const createOrderInSanity = async (orderData) => {
-  const { cartItems: products, userEmail } = orderData
+  const user = await fetchUser(orderData.userEmail)
 
-  console.log('userEmail', userEmail, 'products', products)
-
-  const user = await fetchUser(userEmail)
-
-  const productswithQuantity = products.map((product) => ({
+  const productswithQuantity = orderData.cartItems.map((product) => ({
     product: {
       _type: 'reference',
       _ref: product._id,
@@ -50,12 +46,17 @@ export const createOrderInSanity = async (orderData) => {
 
   const doc = {
     _type: 'order',
+    user_email: orderData.userEmail,
     user: {
       _type: 'reference',
       _ref: user._id,
     },
     products: productswithQuantity,
     created_at: new Date().toISOString(),
+    telephone: orderData.telephone,
+    address: orderData.address,
+    city: orderData.city,
+    zip: orderData.zip,
   }
   try {
     const response = await client.create(doc)
