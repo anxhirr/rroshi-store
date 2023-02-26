@@ -36,3 +36,16 @@ export const fetchProduct = async (slug: Slug) => {
   }
 }
 export default fetchProduct
+
+export const fetchUser = async (email: string) => {
+  const query = groq`
+    *[_type == "user" && email == '${email}'][0]
+    `
+
+  try {
+    const user = await client.fetch(query)
+    return user
+  } catch (error) {
+    console.log(error)
+  }
+}

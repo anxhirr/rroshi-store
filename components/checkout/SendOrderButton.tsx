@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react'
 import { MouseEvent } from 'react'
 import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
-import { client } from '../../lib/sanity.client'
+import { createOrderInSanity } from '../../lib/createInSanity'
 import {
   setPhone,
   setAddress,
@@ -15,14 +15,15 @@ import { RootState } from '../../redux-store/store'
 
 const SendOrderButton = () => {
   const dispatch = useDispatch()
-  // const { data: user, status } = useSession()
+  const { data: user, status } = useSession()
+
+  // console.log('user', user)
+
   const { phone, address, city, zip } = useSelector(
     (state: RootState) => state.checkout
   )
 
-  // const { cartItems, subTotal } = useSelector((state: RootState) => state.cart)
-
-  // console.log('cartItems', cartItems)
+  const { cartItems } = useSelector((state: RootState) => state.cart)
 
   const resetInputs = () => {
     dispatch(setPhone(''))
@@ -32,39 +33,37 @@ const SendOrderButton = () => {
   }
 
   const orderData = {
-    customerPhone: phone,
-    customerAddress: address,
-    customerCity: city,
-    customerZip: zip,
-    // products: [
-    //   {
-    //     _ref: 'a2bf26d0-b157-4194-be77-a46b997d2942',
-    //   },
-    // ],
-
-    // total: subTotal,
-    // orderDate: new Date().toISOString(),
-    // status: 'pending',
+    cartItems,
+    userEmail: user?.user?.email,
   }
 
-  const createOrder = async (order) => {
-    const result = await client.create({
-      _type: 'orders',
-      name: 'anxhi',
-    })
-    console.log('result', result)
-  }
-
-  const sendOrder = (e: MouseEvent<HTMLButtonElement>) => {
+  const sendOrder = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    console.log('Order sent', phone, address, city, zip)
+    // console.log('Order sent', phone, address, city, zip)
 
-    if ([phone, address, city, zip].some((item) => item === '')) {
-      toast.error('Ju lutem plotësoni të gjitha fushat')
-      return
+    // if ([phone, address, city, zip].some((item) => item === '')) {
+    //   toast.error('Ju lutem plotësoni të gjitha fushat')
+    //   return
+    // }
+
+    try {
+      const response = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Something went wrong')
+      }
+
+      const data = await response.json()
+      console.log('data', data)
+    } catch (error) {
+      console.log('error', error)
     }
-
-    createOrder(orderData)
 
     toast.success('Porosia u krye me sukses')
     resetInputs()

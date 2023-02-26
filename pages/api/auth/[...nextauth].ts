@@ -1,6 +1,6 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
-import { createUserInSanity } from '../../../lib/createUserInSanity'
+import { createUserInSanity } from '../../../lib/createInSanity'
 
 export const authOptions = {
   // Configure one or more authentication providers

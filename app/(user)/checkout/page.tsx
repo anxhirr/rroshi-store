@@ -2,6 +2,9 @@ import CheckoutDetails from '../../../components/checkout/CheckoutDetails'
 import OrderDetails from '../../../components/checkout/OrderDetails'
 
 const CheckoutPage = () => {
+  const sendOrder = () => {
+    console.log('Order sent')
+  }
   return (
     <div>
       <h1 className='text-4xl font-bold mb-8 pt-12'>Checkout</h1>
