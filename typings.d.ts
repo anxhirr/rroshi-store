@@ -31,6 +31,7 @@ export type CartItem = {
 export interface orderDataType {
   cartItems: any
   userEmail: string
+  total: number
   telephone: string
   address: string
   city: string

@@ -28,7 +28,8 @@ export const createUserInSanity = async (user: User) => {
 }
 
 export const createOrderInSanity = async (orderData: orderDataType) => {
-  const { cartItems, userEmail, address, city, telephone, zip } = orderData
+  const { cartItems, userEmail, total, address, city, telephone, zip } =
+    orderData
   const user = await fetchUser(userEmail)
 
   const productswithQuantity = cartItems.map((product: CartItem) => ({
@@ -49,6 +50,8 @@ export const createOrderInSanity = async (orderData: orderDataType) => {
     },
     products: productswithQuantity,
     created_at: new Date().toISOString(),
+    status: 'ordered',
+    total,
     telephone,
     address,
     city,

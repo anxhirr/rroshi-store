@@ -54,7 +54,7 @@ const Cart = ({ showCart }) => {
   return (
     <div
       className={`w-full h-full fixed left-0 top-0 z-50 pointer-events-none transition-all duration-300 ${
-        showCart ? 'pointer-events-auto backdrop-blur-sm bg-black/30' : ''
+        showCart ? 'pointer-events-auto backdrop-blur-[1px] bg-black/30' : ''
       }`}
     >
       <div

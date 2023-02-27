@@ -36,13 +36,14 @@ const OrderForm = () => {
   const zipRef = useRef(null)
 
   const { data: user, status } = useSession()
-  const { cartItems } = useSelector((state: RootState) => state.cart)
+  const { cartItems, subTotal } = useSelector((state: RootState) => state.cart)
 
   const onSubmit = (e) => {
     e.preventDefault()
     const orderData = {
       cartItems,
       userEmail: user?.user?.email,
+      total: subTotal,
       telephone: telephoneRef.current.value,
       address: addressRef.current.value,
       city: cityRef.current.value,

@@ -5,7 +5,6 @@ export const orders = {
   fields: [
     {
       name: 'user_email',
-      title: 'User Email',
       type: 'string',
     },
     {
@@ -35,31 +34,40 @@ export const orders = {
     },
     {
       name: 'created_at',
-      title: 'Created At',
       type: 'datetime',
       options: {
         readOnly: true,
       },
     },
     {
+      name: 'status',
+      type: 'string',
+      options: {
+        list: [
+          { value: 'ordered', title: 'Ordered' },
+          { value: 'shipped', title: 'Shipped' },
+          { value: 'delivered', title: 'Delivered' },
+        ],
+      },
+    },
+    {
+      name: 'total',
+      type: 'number',
+    },
+    {
       name: 'telephone',
-      title: 'Telephone',
-
       type: 'string',
     },
     {
       name: 'address',
-      title: 'Address',
       type: 'string',
     },
     {
       name: 'city',
-      title: 'City',
       type: 'string',
     },
     {
       name: 'zip',
-      title: 'ZIP',
       type: 'string',
     },
   ],

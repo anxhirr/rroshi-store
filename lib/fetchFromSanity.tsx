@@ -70,11 +70,13 @@ export const fetchOrdersByEmail = async (email: string) => {
   }
 }
 
-export const getAllOrdersByEmail = async (id: string) => {
+export const getAllOrdersByEmail = async (email: string) => {
   const query = groq`
-      *[_type == "order" && user_email == "${id}"]{
+      *[_type == "order" && user_email == "${email}"]{
         _id,
         created_at,
+        total,
+        status,
         products[]{
           quantity,
           "product": *[_id == ^.product._ref][0] {
