@@ -40,7 +40,6 @@ const cartSlice = createSlice({
 
     addItemToCart(state, action) {
       const newItem = action.payload
-      console.log(newItem)
 
       state.totalQuantity += newItem.quantity
       state.subTotal += newItem.price * newItem.quantity

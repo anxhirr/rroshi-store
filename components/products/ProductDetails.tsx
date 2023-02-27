@@ -1,15 +1,14 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
 import { AlternativeBtn, DefaultBtn } from '../buttons'
-import QuantityBox from '../QuantityBox'
+import { QuantityBox } from '../index'
 import { urlFor } from '../../lib/sanity.client'
 import { formatToLEK } from '../../lib/formatCurrency'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
-import { cartActions } from '../../redux-store/cart-slice'
+import { cartActions } from '../../lib/redux-store/cart-slice'
 import { useRouter } from 'next/navigation'
 
 const ProductDetails = ({ product }) => {

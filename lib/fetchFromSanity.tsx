@@ -21,9 +21,7 @@ export const fetchLogo = async () => {
   `
   return await client.fetch(query)
 }
-type Slug = string
-
-export const fetchProduct = async (slug: Slug) => {
+export const fetchProduct = async (slug: string) => {
   const query = groq`
     *[_type == "product" && slug.current == '${slug}'][0]
     `
@@ -32,10 +30,21 @@ export const fetchProduct = async (slug: Slug) => {
     const product = await client.fetch(query)
     return product
   } catch (error) {
-    console.log(error)
+    return error.message
   }
 }
-export default fetchProduct
+export const fetchProductByRef = async (productRef: string) => {
+  const query = groq`
+      *[ _id == "${productRef}" ][0]
+    `
+
+  try {
+    const product = await client.fetch(query)
+    return product
+  } catch (error) {
+    return error.message
+  }
+}
 
 export const fetchUser = async (email: string) => {
   const query = groq`
@@ -46,18 +55,46 @@ export const fetchUser = async (email: string) => {
     const user = await client.fetch(query)
     return user
   } catch (error) {
-    console.log(error)
+    return error.message
   }
 }
 export const fetchOrdersByEmail = async (email: string) => {
   const query = groq`
-    *[_type == "order" && user.email == $userEmail]
+    *[_type == "order" && user_email == "${email}"]
     `
 
   try {
-    const user = await client.fetch(query)
-    return user
+    return await client.fetch(query)
   } catch (error) {
-    console.log(error)
+    return error.message
+  }
+}
+
+export const getAllOrdersByEmail = async (id: string) => {
+  const query = groq`
+      *[_type == "order" && user_email == "${id}"]{
+        _id,
+        created_at,
+        products[]{
+          quantity,
+          "product": *[_id == ^.product._ref][0] {
+            name,
+            price,
+            slug,
+            details,
+            "image": image[0]{
+              asset->{
+                _id,
+                url
+              }
+            }
+          }
+        }
+      }
+  `
+  try {
+    return await client.fetch(query)
+  } catch (error) {
+    return error.message
   }
 }

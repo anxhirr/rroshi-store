@@ -5,9 +5,10 @@ import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../redux-store/store'
+import { RootState } from '../../lib/redux-store/store'
+import { orderDataType } from '../../typings'
 
-const sendOrderToSanity = async (orderData, router) => {
+const sendOrderToSanity = async (orderData: orderDataType, router) => {
   try {
     const response = await fetch('/api/create-order', {
       method: 'POST',

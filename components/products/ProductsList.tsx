@@ -4,8 +4,6 @@ import Product from './Product'
 const ProductsList = async () => {
   const products = await fetchProducts()
 
-  console.log('products', products)
-
   return (
     <>
       <div className='products-heading'>

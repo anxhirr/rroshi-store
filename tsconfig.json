@@ -24,7 +24,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "redux-store/checkout-slice.js",
+    "lib/redux-store/checkout-slice.js",
     "app/(user)/head.tsx"
   ],
   "exclude": ["node_modules"]

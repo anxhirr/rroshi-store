@@ -2,7 +2,7 @@
 
 import { AiOutlineShopping } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartActions } from '../../redux-store/cart-slice'
+import { cartActions } from '../../lib/redux-store/cart-slice'
 import Cart from '../Cart'
 
 const ChartButton = () => {

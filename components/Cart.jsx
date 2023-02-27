@@ -3,12 +3,12 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartActions } from '../redux-store/cart-slice'
+import { cartActions } from '../lib/redux-store/cart-slice'
 import { urlFor } from '../lib/sanity.client'
 import { formatToLEK } from '../lib/formatCurrency'
 
 import { RedBtn } from './buttons'
-import QuantityBox from './QuantityBox'
+import { QuantityBox } from './index'
 
 import { AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai'
 import { RiDeleteBin6Line } from 'react-icons/ri'

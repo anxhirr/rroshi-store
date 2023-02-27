@@ -2,7 +2,7 @@
 
 import { useSelector } from 'react-redux'
 import { formatToLEK } from '../../lib/formatCurrency'
-import { RootState } from '../../redux-store/store'
+import { RootState } from '../../lib/redux-store/store'
 
 const OrderDetails = () => {
   const { cartItems, subTotal } = useSelector((state: RootState) => state.cart)

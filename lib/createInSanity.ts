@@ -1,41 +1,37 @@
+import { CartItem, orderDataType } from '../typings'
 import { fetchUser } from './fetchFromSanity'
 import { client } from './sanity.client'
 
-export interface User {
+export type User = {
+  image: string
   email: string
   name: string
 }
 
 export const createUserInSanity = async (user: User) => {
-  const { name, email } = user
+  const { name, email, image } = user
 
   const existingUser = await client.fetch(
     `*[_type == "user" && email == $email][0]`,
     { email }
   )
 
-  if (existingUser) {
-    console.log('User already exists in Sanity')
-    return
-  }
+  if (existingUser) return
 
   const doc = {
     _type: 'user',
     name,
     email,
+    image_url: image,
   }
-  try {
-    const response = await client.create(doc)
-    console.log('User created in Sanity', response)
-  } catch (error) {
-    console.error('Error creating user in Sanity', error)
-  }
+  await client.create(doc)
 }
 
-export const createOrderInSanity = async (orderData) => {
-  const user = await fetchUser(orderData.userEmail)
+export const createOrderInSanity = async (orderData: orderDataType) => {
+  const { cartItems, userEmail, address, city, telephone, zip } = orderData
+  const user = await fetchUser(userEmail)
 
-  const productswithQuantity = orderData.cartItems.map((product) => ({
+  const productswithQuantity = cartItems.map((product: CartItem) => ({
     product: {
       _type: 'reference',
       _ref: product._id,
@@ -46,24 +42,17 @@ export const createOrderInSanity = async (orderData) => {
 
   const doc = {
     _type: 'order',
-    user_email: orderData.userEmail,
+    user_email: userEmail,
     user: {
       _type: 'reference',
       _ref: user._id,
     },
     products: productswithQuantity,
     created_at: new Date().toISOString(),
-    telephone: orderData.telephone,
-    address: orderData.address,
-    city: orderData.city,
-    zip: orderData.zip,
+    telephone,
+    address,
+    city,
+    zip,
   }
-  try {
-    const response = await client.create(doc)
-    console.log('Order created in Sanity', response)
-    return response
-  } catch (error) {
-    console.error('Error creating order in Sanity', error)
-    return error
-  }
+  await client.create(doc)
 }

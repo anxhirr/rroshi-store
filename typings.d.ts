@@ -27,3 +27,12 @@ export type CartItem = {
 //   telephone: string
 //   zip: string
 // }
+
+export interface orderDataType {
+  cartItems: any
+  userEmail: string
+  telephone: string
+  address: string
+  city: string
+  zip: string
+}
