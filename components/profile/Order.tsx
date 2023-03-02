@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatToLEK } from '../../lib/formatCurrency'
-import { urlFor } from '../../lib/sanity.client'
 
 const Order = ({ order }) => {
   return (
