@@ -1,8 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatToLEK, formatDate } from '../../lib/format'
+import DeleteOrderBtn from './deleteOrderBtn'
 
 const Order = ({ order }) => {
+  console.log(order)
   return (
     <div className='border border-red-100 p-5 rounded-lg bg-slate-300 mt-4'>
       <div>
@@ -28,9 +30,7 @@ const Order = ({ order }) => {
                 <p>Sasia: {quantity}</p>
                 <p>Totali {formatToLEK(order.total)}</p>
                 <div className='my-5'>
-                  <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
-                    Fshi orderin
-                  </button>
+                  <DeleteOrderBtn id={order._id} />
                 </div>
               </div>
             </div>

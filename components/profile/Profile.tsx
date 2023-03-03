@@ -1,11 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
-import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { fetchOrdersByEmail } from '../../lib/fetchFromSanity'
 import { RootState } from '../../lib/redux-store/store'
 import { AlternativeBtn } from '../buttons'
 import OrdersList from './OrdersList'
