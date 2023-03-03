@@ -601,4 +601,7 @@ span.text-red {
   .input {
     @apply mb-6 border-2 w-full h-10 rounded-md px-2;
   }
+  .footerIcon {
+    @apply hover:opacity-90 cursor-pointer;
+  }
 }

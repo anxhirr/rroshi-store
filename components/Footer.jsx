@@ -13,18 +13,22 @@ const Footer = () => {
         <Link
           href='https://www.instagram.com/rroshi_store/'
           target='_blank'
-          className='hover:opacity-90 cursor-pointer'
+          className='footerIcon'
         >
           <RiInstagramFill />
         </Link>
         <Link
           href='https://www.facebook.com/rroshistore'
           target='_blank'
-          className='hover:opacity-90 cursor-pointer'
+          className='footerIcon'
         >
           <RiFacebookCircleFill />
         </Link>
-        <Link href='' className='hover:opacity-90 cursor-pointer'>
+        <Link
+          href='https://wa.me/+355683333140'
+          target='_blank'
+          className='footerIcon'
+        >
           <RiWhatsappFill />
         </Link>
       </p>

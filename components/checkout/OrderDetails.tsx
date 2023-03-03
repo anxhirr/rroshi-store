@@ -1,7 +1,7 @@
 'use client'
 
 import { useSelector } from 'react-redux'
-import { formatToLEK } from '../../lib/formatCurrency'
+import { formatToLEK } from '../../lib/format'
 import { RootState } from '../../lib/redux-store/store'
 
 const OrderDetails = () => {

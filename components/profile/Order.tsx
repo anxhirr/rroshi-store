@@ -1,43 +1,42 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { formatToLEK } from '../../lib/formatCurrency'
+import { formatToLEK, formatDate } from '../../lib/format'
 
 const Order = ({ order }) => {
   return (
-    <div className='border border-red-100 p-10 mt-4'>
+    <div className='border border-red-100 p-5 rounded-lg bg-slate-300 mt-4'>
       <div>
-        <p> Koha: {order.created_at.toLocaleString()}</p>
         {order.products.map(({ product, quantity }) => {
           const { slug, name, price, _id } = product
           return (
-            <div key={_id}>
+            <div className='flex gap-4' key={_id}>
               <div>
-                <Image
-                  src={product.image.asset.url}
-                  alt={name}
-                  width={250}
-                  height={250}
-                  className='product-image'
-                />
+                <Link href={`/product/${slug.current}`}>
+                  <Image
+                    src={product.image.asset.url}
+                    alt={name}
+                    width={250}
+                    height={250}
+                    className='product-image'
+                  />
+                </Link>
               </div>
-              <div>
+              <div className='flex flex-col justify-center'>
                 <p>Emri: {name}</p>
                 <p> Cmimi: {price}</p>
+                <p> Data: {formatDate(order.created_at)}</p>
                 <p>Sasia: {quantity}</p>
+                <p>Totali {formatToLEK(order.total)}</p>
                 <div className='my-5'>
-                  <Link
-                    className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-                    href={`/product/${slug.current}`}
-                  >
-                    Shko te produkti
-                  </Link>
+                  <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'>
+                    Fshi orderin
+                  </button>
                 </div>
               </div>
             </div>
           )
         })}
       </div>
-      <p>Totali {formatToLEK(order.total)}</p>
     </div>
   )
 }

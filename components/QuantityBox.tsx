@@ -1,6 +1,16 @@
 import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 
-const QuantityBox = ({ quantity, handleMinus, handlePlus }) => {
+type QuantityBoxProps = {
+  quantity: number
+  handleMinus: () => void
+  handlePlus: () => void
+}
+
+const QuantityBox = ({
+  quantity,
+  handleMinus,
+  handlePlus,
+}: QuantityBoxProps) => {
   return (
     <div className='border border-gray-500 flex items-center max-w-min '>
       <span className='cursor-pointer p-4' onClick={handleMinus}>

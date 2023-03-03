@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartActions } from '../lib/redux-store/cart-slice'
 import { urlFor } from '../lib/sanity.client'
-import { formatToLEK } from '../lib/formatCurrency'
+import { formatToLEK } from '../lib/format'
 
 import { RedBtn } from './buttons'
 import { QuantityBox } from './index'
