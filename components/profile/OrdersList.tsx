@@ -1,7 +1,6 @@
 import Order from './Order'
 
 const OrdersList = ({ orders }) => {
-  console.log(orders)
   return (
     <div className='flex flex-col gap-3 justify-center items-center'>
       {orders.map((order) => (

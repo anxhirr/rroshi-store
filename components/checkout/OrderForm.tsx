@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../lib/redux-store/store'
 import { orderDataType } from '../../typings'
+import { GreenToBlueBtn } from '../../components/buttons'
 
 const sendOrderToSanity = async (orderData: orderDataType, router) => {
   try {
@@ -55,7 +56,7 @@ const OrderForm = () => {
 
   return (
     <form className='flex-1' onSubmit={(e) => onSubmit(e)}>
-      <div className='flex flex-col mb-16 ml-2'>
+      <div className='flex flex-col mb-10 ml-2'>
         <label htmlFor='phone' className='mb-1'>
           Numri i telefonit *
         </label>
@@ -82,7 +83,7 @@ const OrderForm = () => {
           placeholder='Shkruani shënime për porosinë tuaj, p.sh. shënime te veçanta për dërgesën.'
         ></textarea>
       </div>
-      <button>Fillo dergesen</button>
+      <GreenToBlueBtn>Fillo dergesen</GreenToBlueBtn>
     </form>
   )
 }

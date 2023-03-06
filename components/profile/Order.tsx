@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { formatToLEK, formatDate } from '../../lib/format'
-import DeleteOrderBtn from './deleteOrderBtn'
+import DeleteOrderBtn from './DeleteOrderBtn'
 
 const Order = ({ order }) => {
   console.log(order)
