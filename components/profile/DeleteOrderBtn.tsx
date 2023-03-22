@@ -1,10 +1,7 @@
 'use client'
 
-const DeleteOrderBtn = ({ id }) => {
+const DeleteOrderBtn = ({ id, setInStateOrders }) => {
   const handleClick = async () => {
-    console.log(id)
-    // console.log('delete order')
-
     const res = await fetch('/api/orders/deleteOrder', {
       method: 'POST',
       headers: {
@@ -18,6 +15,7 @@ const DeleteOrderBtn = ({ id }) => {
 
     if (res.status === 200) {
       console.log('Order deleted')
+      setInStateOrders((prev) => prev.filter((order) => order._id !== id))
     }
 
     if (res.status === 500) {

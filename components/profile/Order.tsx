@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { formatToLEK, formatDate } from '../../lib/format'
 import DeleteOrderBtn from './DeleteOrderBtn'
 
-const Order = ({ order }) => {
+const Order = ({ order, setInStateOrders }) => {
   console.log(order)
   return (
     <div className='border border-red-100 p-5 rounded-lg bg-slate-300 mt-4'>
@@ -30,7 +30,10 @@ const Order = ({ order }) => {
                 <p>Sasia: {quantity}</p>
                 <p>Totali {formatToLEK(order.total)}</p>
                 <div className='my-5'>
-                  <DeleteOrderBtn id={order._id} />
+                  <DeleteOrderBtn
+                    id={order._id}
+                    setInStateOrders={setInStateOrders}
+                  />
                 </div>
               </div>
             </div>

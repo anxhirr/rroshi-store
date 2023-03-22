@@ -12,22 +12,6 @@ export type CartItem = {
   _updated_at: string
 }
 
-// export type OrderDataType = {
-//   cartItems: CartItem[]
-//   userEmail: string
-//   address: string
-//   city: string
-//   telephone: string
-//   zip: string
-// }
-
-// export type OrderFormDataType = {
-//   address: string
-//   city: string
-//   telephone: string
-//   zip: string
-// }
-
 export interface orderDataType {
   cartItems: any
   userEmail: string
@@ -36,4 +20,12 @@ export interface orderDataType {
   address: string
   city: string
   zip: string
+}
+
+export interface toRenderOrderDataType {
+  created_at: string
+  products: any
+  total: number
+  status: string
+  _id: string
 }
