@@ -2,32 +2,34 @@
 
 import { useState } from 'react'
 import { AiFillStar, AiOutlineStar } from 'react-icons/ai'
-import { AlternativeBtn, DefaultBtn } from '../buttons'
 import { QuantityBox } from '../index'
 import { urlFor } from '../../lib/sanity.client'
 import { formatToLEK } from '../../lib/format'
 import Image from 'next/image'
 import { useDispatch } from 'react-redux'
-import { cartActions } from '../../lib/redux-store/cart-slice'
+import { addItemToCart } from '../../lib/redux-store/cart-slice'
 import { useRouter } from 'next/navigation'
+import { ProductDataType } from '../../typings'
 
-const ProductDetails = ({ product }) => {
+interface Props {
+  product: ProductDataType
+}
+
+const ProductDetails = ({ product }: Props) => {
   const router = useRouter()
   const dispatch = useDispatch()
   const [index, setIndex] = useState(0)
   const [quantity, setQuantity] = useState(1)
 
+  console.log(product)
+
   const { image, name, details, price } = product
 
-  const handleMinus = () => {
-    setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
-  }
-  const handlePlus = () => {
-    setQuantity((prev) => prev + 1)
-  }
+  const handleMinus = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev))
+  const handlePlus = () => setQuantity((prev) => prev + 1)
 
   const onAddToCart = (product) => {
-    dispatch(cartActions.addItemToCart({ ...product, quantity }))
+    dispatch(addItemToCart({ ...product, quantity }))
   }
 
   const handleOrderNowClick = () => {
@@ -93,10 +95,15 @@ const ProductDetails = ({ product }) => {
             />
           </div>
           <div className='flex gap-5 mt-8'>
-            <AlternativeBtn onClick={() => onAddToCart(product)}>
+            <button
+              className='alternative-btn'
+              onClick={() => onAddToCart(product)}
+            >
               Shto në Shportë
-            </AlternativeBtn>
-            <DefaultBtn onClick={handleOrderNowClick}>Porosit Tani</DefaultBtn>
+            </button>
+            <button className='default-btn' onClick={handleOrderNowClick}>
+              Porosit Tani
+            </button>
           </div>
         </div>
       </div>

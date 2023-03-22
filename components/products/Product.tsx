@@ -2,8 +2,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '../../lib/sanity.client'
 import { formatToLEK } from '../../lib/format'
+import { ProductDataType } from '../../typings'
 
-const Product = ({ product }) => {
+interface Props {
+  product: ProductDataType
+}
+
+const Product = ({ product }: Props) => {
   const { image, name, slug, price } = product
 
   return (

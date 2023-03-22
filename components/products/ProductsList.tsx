@@ -1,8 +1,9 @@
 import { fetchProducts } from '../../lib/fetchFromSanity'
+import { ProductDataType } from '../../typings'
 import Product from './Product'
 
 const ProductsList = async () => {
-  const products = await fetchProducts()
+  const products: ProductDataType[] = await fetchProducts()
 
   return (
     <>

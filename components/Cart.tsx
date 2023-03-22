@@ -3,11 +3,16 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartActions } from '../lib/redux-store/cart-slice'
+import {
+  toggleCart,
+  removeItemFromCart,
+  incCartItemQuantity,
+  decCartItemQuantity,
+  setIsCheckingOut,
+  selectState,
+} from '../lib/redux-store/cart-slice'
 import { urlFor } from '../lib/sanity.client'
 import { formatToLEK } from '../lib/format'
-
-import { RedBtn } from './buttons'
 import { QuantityBox } from './index'
 
 import { AiOutlineLeft, AiOutlineShopping } from 'react-icons/ai'
@@ -19,36 +24,30 @@ const Cart = ({ showCart }) => {
   const router = useRouter()
   const dispatch = useDispatch()
   const { data: user, status } = useSession()
-  const { subTotal, totalQuantity, cartItems } = useSelector(
-    (state) => state.cart
-  )
+  const { subTotal, totalQuantity, cartItems } = useSelector(selectState)
 
   const handleCart = () => {
-    dispatch(cartActions.toggleCart())
+    dispatch(toggleCart())
   }
 
   const handleRemoveItem = (id) => {
-    dispatch(cartActions.removeItemFromCart(id))
+    dispatch(removeItemFromCart(id))
   }
 
   const handleIncQuantity = (id) => {
-    dispatch(cartActions.incCartItemQuantity(id))
+    dispatch(incCartItemQuantity(id))
   }
   const handleDecQuantity = (id) => {
-    dispatch(cartActions.decCartItemQuantity(id))
+    dispatch(decCartItemQuantity(id))
   }
 
   const handleCheckout = () => {
-    dispatch(cartActions.toggleCart())
-    dispatch(cartActions.setIsCheckingOut(true))
+    dispatch(toggleCart())
+    dispatch(setIsCheckingOut(true))
 
-    if (user) {
-      router.push('/checkout')
-    }
+    if (user) router.push('/checkout')
 
-    if (!user) {
-      router.push('/account')
-    }
+    if (!user) router.push('/account')
   }
 
   return (
@@ -77,9 +76,9 @@ const Cart = ({ showCart }) => {
             <AiOutlineShopping size={150} className='m-auto' />
             <h3>Shporta juaj është bosh</h3>
             <Link href='/'>
-              <RedBtn onClick={handleCart} className='mt-5'>
+              <button className='red-btn mt-5' onClick={handleCart}>
                 Shiko produkte të tjera
-              </RedBtn>
+              </button>
             </Link>
           </div>
         )}
@@ -143,14 +142,13 @@ const Cart = ({ showCart }) => {
               </h3>
               <h3>{formatToLEK(subTotal)}</h3>
             </div>
-            <div className='btn-container'>
-              <RedBtn
-                onClick={handleCheckout}
-                className=' w-full text-2xl mt-4'
-              >
-                Checkout
-              </RedBtn>
-            </div>
+
+            <button
+              onClick={handleCheckout}
+              className='red-btn w-full text-2xl mt-4'
+            >
+              Checkout
+            </button>
           </div>
         )}
       </div>

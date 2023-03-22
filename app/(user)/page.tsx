@@ -1,13 +1,14 @@
 import { FooterBanner, HeroBanner, Product } from '../../components'
 import ProductsList from '../../components/products/ProductsList'
-import { fetchBanner, fetchProducts } from '../../lib/fetchFromSanity'
+import { fetchBanner } from '../../lib/fetchFromSanity'
+import { BannerDataType } from '../../typings'
 
 const HomePage = async () => {
-  const bannerData = await fetchBanner()
+  const bannerData: BannerDataType[] = await fetchBanner()
 
   return (
     <>
-      <HeroBanner heroBanner={bannerData.length && bannerData[0]} />
+      <HeroBanner heroBanner={bannerData ? bannerData[0] : []} />
       {/*  @ts-expect-error Server Component */}
       <ProductsList />
       <FooterBanner footerBanner={bannerData && bannerData[0]} />

@@ -2,15 +2,15 @@
 
 import { AiOutlineShopping } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartActions } from '../../lib/redux-store/cart-slice'
+import { selectState, toggleCart } from '../../lib/redux-store/cart-slice'
 import Cart from '../Cart'
 
 const ChartButton = () => {
   const dispatch = useDispatch()
-  const { showCart, totalQuantity } = useSelector((state) => state.cart)
+  const { showCart, totalQuantity } = useSelector(selectState)
 
   const handleCart = () => {
-    dispatch(cartActions.toggleCart())
+    dispatch(toggleCart())
   }
 
   return (

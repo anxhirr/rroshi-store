@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 import { urlFor } from '../lib/sanity.client'
-import { WhiteBtn } from './buttons'
 import Image from 'next/image'
 
 const FooterBanner = ({ footerBanner }) => {
@@ -47,7 +46,7 @@ const FooterBanner = ({ footerBanner }) => {
           </h3>
           <p>{desc}</p>
           <Link href={`product/${product}`}>
-            <WhiteBtn className='mt-6'>{buttonText}</WhiteBtn>
+            <button className='white-btn mt-6'>{buttonText}</button>
           </Link>
         </div>
       </div>

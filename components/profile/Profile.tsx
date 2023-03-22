@@ -3,8 +3,7 @@
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../lib/redux-store/store'
-import { AlternativeBtn } from '../buttons'
+import { selectState } from '../../lib/redux-store/cart-slice'
 import OrdersList from './OrdersList'
 
 const Profile = ({ orders }) => {
@@ -13,7 +12,7 @@ const Profile = ({ orders }) => {
     status,
   } = useSession()
 
-  const { cartItems } = useSelector((state: RootState) => state.cart)
+  const { cartItems } = useSelector(selectState)
 
   return (
     <div>
@@ -28,7 +27,9 @@ const Profile = ({ orders }) => {
         <h1 className='text-center font-bold text-4xl text-gray-600'>
           Profili, {user.name}
         </h1>
-        <AlternativeBtn onClick={() => signOut()}>Dilni</AlternativeBtn>
+        <button className='alternative-btn' onClick={() => signOut()}>
+          Dilni
+        </button>
       </div>
       <div className='mt-5 text-center'>
         <p>Produktet ne shporte: {cartItems.length}</p>

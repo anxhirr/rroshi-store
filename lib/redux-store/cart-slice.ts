@@ -1,8 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { toast } from 'react-hot-toast'
+import { cartItem } from '../../typings'
+import { RootState } from './store'
 
-const initialCartState = {
+export interface cartState {
+  showCart: boolean
+  cartItems: cartItem[]
+  subTotal: number
+  totalQuantity: number
+  isCheckingOut: boolean
+}
+
+const initialCartState: cartState = {
   showCart: false,
   cartItems: [],
   subTotal: 0,
@@ -17,7 +27,7 @@ const cartSlice = createSlice({
     toggleCart(state) {
       state.showCart = !state.showCart
     },
-    incCartItemQuantity(state, action) {
+    incCartItemQuantity(state, action: PayloadAction<string>) {
       const id = action.payload
       const foundItemIndex = state.cartItems.findIndex(
         (item) => item._id === id
@@ -26,7 +36,7 @@ const cartSlice = createSlice({
       state.totalQuantity++
       state.subTotal += state.cartItems[foundItemIndex].price
     },
-    decCartItemQuantity(state, action) {
+    decCartItemQuantity(state, action: PayloadAction<string>) {
       const id = action.payload
       const foundItemIndex = state.cartItems.findIndex(
         (item) => item._id === id
@@ -38,7 +48,7 @@ const cartSlice = createSlice({
       state.subTotal -= state.cartItems[foundItemIndex].price
     },
 
-    addItemToCart(state, action) {
+    addItemToCart(state, action: PayloadAction<cartItem>) {
       const newItem = action.payload
 
       state.totalQuantity += newItem.quantity
@@ -56,7 +66,7 @@ const cartSlice = createSlice({
 
       toast.success(`${newItem.quantity} ${newItem.name} added to the cart.`)
     },
-    removeItemFromCart(state, action) {
+    removeItemFromCart(state, action: PayloadAction<string>) {
       const id = action.payload
       const foundItem = state.cartItems.find((item) => item._id === id)
 
@@ -67,11 +77,27 @@ const cartSlice = createSlice({
 
       toast.success(`${foundItem.name} removed from the cart.`)
     },
-    setIsCheckingOut(state, action) {
+    setIsCheckingOut(state, action: PayloadAction<boolean>) {
       state.isCheckingOut = action.payload
     },
   },
 })
 
-export const cartActions = cartSlice.actions
+export const {
+  toggleCart,
+  incCartItemQuantity,
+  decCartItemQuantity,
+  addItemToCart,
+  removeItemFromCart,
+  setIsCheckingOut,
+} = cartSlice.actions
+
+export const selectState = (state: RootState) => ({
+  showCart: state.cart.showCart,
+  cartItems: state.cart.cartItems,
+  subTotal: state.cart.subTotal,
+  totalQuantity: state.cart.totalQuantity,
+  isCheckingOut: state.cart.isCheckingOut,
+})
+
 export default cartSlice.reducer

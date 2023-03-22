@@ -2,10 +2,10 @@
 
 import { useSelector } from 'react-redux'
 import { formatToLEK } from '../../lib/format'
-import { RootState } from '../../lib/redux-store/store'
+import { selectState } from '../../lib/redux-store/cart-slice'
 
 const OrderDetails = () => {
-  const { cartItems, subTotal } = useSelector((state: RootState) => state.cart)
+  const { cartItems, subTotal } = useSelector(selectState)
 
   return (
     <div className='flex-1'>

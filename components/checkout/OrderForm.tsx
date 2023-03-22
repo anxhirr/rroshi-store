@@ -5,9 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../lib/redux-store/store'
+import { selectState } from '../../lib/redux-store/cart-slice'
 import { orderDataType } from '../../typings'
-import { GreenToBlueBtn } from '../../components/buttons'
 
 const sendOrderToSanity = async (orderData: orderDataType, router) => {
   try {
@@ -37,7 +36,7 @@ const OrderForm = () => {
   const zipRef = useRef(null)
 
   const { data: user, status } = useSession()
-  const { cartItems, subTotal } = useSelector((state: RootState) => state.cart)
+  const { cartItems, subTotal } = useSelector(selectState)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -83,7 +82,7 @@ const OrderForm = () => {
           placeholder='Shkruani shënime për porosinë tuaj, p.sh. shënime te veçanta për dërgesën.'
         ></textarea>
       </div>
-      <GreenToBlueBtn>Fillo dergesen</GreenToBlueBtn>
+      <button className='red-btn'>Fillo dergesen</button>
     </form>
   )
 }

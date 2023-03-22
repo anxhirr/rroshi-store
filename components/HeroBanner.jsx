@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 import { urlFor } from '../lib/sanity.client'
-import { RedBtn } from './buttons'
 import Image from 'next/image'
 
 const HeroBanner = ({ heroBanner }) => {
@@ -15,7 +14,9 @@ const HeroBanner = ({ heroBanner }) => {
           </h3>
           <h1>{heroBanner.largeText}</h1>
           <Link href={`/product/${heroBanner.product}`}>
-            <RedBtn className='mt-8 leading-5'>{heroBanner.buttonText}</RedBtn>
+            <button className='mt-8 leading-5 red-btn'>
+              {heroBanner.buttonText}
+            </button>
           </Link>
         </div>
         <div>

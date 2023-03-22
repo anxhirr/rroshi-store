@@ -1,6 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import cartReducer from './cart-slice'
-import checkoutReducer from './checkout-slice'
+import cartReducer, { cartState } from './cart-slice'
 
 import { persistReducer } from 'redux-persist'
 import persistStore from 'redux-persist/es/persistStore'
@@ -13,7 +12,6 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   cart: cartReducer,
-  checkout: checkoutReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -28,27 +26,6 @@ export const store = configureStore({
 
 export const persistor = persistStore(store)
 
-type CartItem = {
-  _id: string
-  name: string
-  price: number
-  quantity: number
-  image: string
-}
-
 export interface RootState {
-  cart: {
-    showCart: boolean
-    cartItems: CartItem[]
-    totalQuantity: number
-    subTotal: number
-    quantity: number
-    isCheckingOut: boolean
-  }
-  checkout: {
-    phone: string
-    address: string
-    city: string
-    zip: string
-  }
+  cart: cartState
 }
