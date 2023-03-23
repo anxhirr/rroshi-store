@@ -16,7 +16,7 @@ const Providers = ({ children, session }) => {
           pageId='427120347728357'
           language='sv_SE'
           themeColor={'#000000'}
-          bottomSpacing={300}
+          bottomSpacing={0}
           loggedInGreeting='loggedInGreeting'
           loggedOutGreeting='loggedOutGreeting'
           greetingDialogDisplay={'show'}
