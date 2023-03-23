@@ -25,10 +25,8 @@ const Success = () => {
             rroshistore@gmail.com
           </a>
         </p>
-        <Link href='/'>
-          <button type='button' className='btn'>
-            Shiko Produkte të tjera
-          </button>
+        <Link href='/' className='red-btn'>
+          Shiko Produkte të tjera
         </Link>
       </div>
     </div>

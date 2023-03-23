@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
 import { toast } from 'react-hot-toast'
-import { cartItem } from '../../typings'
+
+import { CartItem } from '../../typings'
 import { RootState } from './store'
 
 export interface cartState {
   showCart: boolean
-  cartItems: cartItem[]
+  cartItems: CartItem[]
   subTotal: number
   totalQuantity: number
   isCheckingOut: boolean
@@ -48,7 +48,7 @@ const cartSlice = createSlice({
       state.subTotal -= state.cartItems[foundItemIndex].price
     },
 
-    addItemToCart(state, action: PayloadAction<cartItem>) {
+    addItemToCart(state, action: PayloadAction<CartItem>) {
       const newItem = action.payload
 
       state.totalQuantity += newItem.quantity

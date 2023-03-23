@@ -49,6 +49,6 @@ export interface ProductDataType extends SanityDataType {
   }
 }
 
-export interface cartItem extends ProductDataType {
+export interface CartItem extends ProductDataType {
   quantity: number
 }
