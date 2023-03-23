@@ -1,4 +1,4 @@
-import { CartItem, orderDataType } from '../typings'
+import { CartItem, CreateOrderDataType } from '../typings'
 import { fetchUser } from './fetchFromSanity'
 import { client } from './sanity.client'
 
@@ -27,7 +27,7 @@ export const createUserInSanity = async (user: User) => {
   await client.create(doc)
 }
 
-export const createOrderInSanity = async (orderData: orderDataType) => {
+export const createOrderInSanity = async (orderData: CreateOrderDataType) => {
   const { cartItems, userEmail, total, address, city, telephone, zip } =
     orderData
   const user = await fetchUser(userEmail)
@@ -49,7 +49,7 @@ export const createOrderInSanity = async (orderData: orderDataType) => {
       _ref: user._id,
     },
     products: productswithQuantity,
-    created_at: new Date().toISOString(),
+    _created_at: new Date().toISOString(),
     status: 'ordered',
     total,
     telephone,

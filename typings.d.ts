@@ -1,13 +1,3 @@
-export interface orderDataType {
-  cartItems: any
-  userEmail: string
-  total: number
-  telephone: string
-  address: string
-  city: string
-  zip: string
-}
-
 export interface SanityDataType {
   _created_at: string
   _id: string
@@ -51,4 +41,22 @@ export interface ProductDataType extends SanityDataType {
 
 export interface CartItem extends ProductDataType {
   quantity: number
+}
+
+export interface CreateOrderDataType {
+  cartItems: CartItem[]
+  userEmail: string
+  total: number
+  telephone: string
+  address: string
+  city: string
+  zip: string
+}
+
+export interface FetchedOrderDataType {
+  _createdAt: string
+  _id: string
+  products: ProductDataType
+  status: string
+  total: number
 }

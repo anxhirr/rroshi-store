@@ -8,9 +8,10 @@ import { CartItem } from '../../typings'
 interface Props {
   cartItem: CartItem
   handleRemoveItem: (id: string) => void
+  handleItemClick: (id: string) => void
 }
 
-const CartItem = ({ cartItem, handleRemoveItem }: Props) => {
+const CartItem = ({ cartItem, handleRemoveItem, handleItemClick }: Props) => {
   const router = useRouter()
 
   return (
@@ -19,10 +20,10 @@ const CartItem = ({ cartItem, handleRemoveItem }: Props) => {
         <Image
           src={urlFor(cartItem.image[0]).url()}
           alt={cartItem.name}
-          className='h-full w-full object-cover object-center'
+          className='product-image cursor-pointer'
           width={100}
           height={100}
-          onClick={() => router.push(`/product/${cartItem.slug.current}`)}
+          onClick={() => handleItemClick(cartItem.slug.current)}
         />
       </div>
 
@@ -37,7 +38,7 @@ const CartItem = ({ cartItem, handleRemoveItem }: Props) => {
           {/* <p className='mt-1 text-sm text-gray-500'>{product.color}</p> */}
         </div>
         <div className='flex flex-1 items-end justify-between text-sm'>
-          <p className='text-gray-500'>Quantity: {cartItem.quantity}</p>
+          <p className='text-gray-500'>Sasia: {cartItem.quantity}</p>
 
           <div className='flex'>
             <button

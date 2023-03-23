@@ -6,9 +6,9 @@ import { useRef } from 'react'
 import { toast } from 'react-hot-toast'
 import { useSelector } from 'react-redux'
 import { selectState } from '../../lib/redux-store/cart-slice'
-import { orderDataType } from '../../typings'
+import { CreateOrderDataType } from '../../typings'
 
-const sendOrderToSanity = async (orderData: orderDataType, router) => {
+const sendOrderToSanity = async (orderData: CreateOrderDataType, router) => {
   try {
     const response = await fetch('/api/create-order', {
       method: 'POST',
