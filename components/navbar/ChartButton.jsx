@@ -17,11 +17,13 @@ const ChartButton = () => {
     <>
       <button
         type='button'
-        className='cart-icon duration-150'
+        className='relative font-bold text-2xl hover:scale-110 duration-150'
         onClick={handleCart}
       >
         <AiOutlineShopping />
-        <span className='cart-item-qty'>{totalQuantity}</span>
+        <span className='cart-item-qty absolute top-0 h-4 w-4 bg-red-600 text-white font-semibold text-center rounded-full text-xs '>
+          {totalQuantity}
+        </span>
       </button>
       {/* {showCart && <Cart />} */}
       <Cart showCart={showCart} />

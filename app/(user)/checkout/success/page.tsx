@@ -12,16 +12,18 @@ const Success = () => {
   }, [])
 
   return (
-    <div className='success-wrapper'>
-      <div className='success'>
-        <p className='icon'>
+    <div className='text-center'>
+      <div className='p-10 bg-milk flex flex-col justify-center items-center rounded-3xl gap-4'>
+        <p className='text-green-700 text-5xl'>
           <BsBagCheckFill />
         </p>
-        <h2>Faleminderit për orderin tuaj</h2>
-        <p className='email-msg'>Kontrolloni email-in tuaj per faturën</p>
-        <p className='description'>
-          Nëse keni ndonjë pyetje, ju lutem na dergoni email
-          <a className='email' href='mailto:rroshistore@gmail.com'>
+        <h2 className='text-txt text-5xl font-black'>
+          Faleminderit për orderin tuaj
+        </h2>
+        <p className='font-semibold'>Kontrolloni email-in tuaj per faturën</p>
+        <p className='font-semibold mt-4'>
+          Nëse keni ndonjë pyetje, ju lutem na dergoni email{' '}
+          <a className='text-red-600' href='mailto:rroshistore@gmail.com'>
             rroshistore@gmail.com
           </a>
         </p>

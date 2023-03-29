@@ -39,26 +39,26 @@ const ProductDetails = ({ product }: Props) => {
 
   return (
     <div>
-      <div className='product-detail-container'>
+      <div className='flex flex-col sm:flex-row gap-10 m-5 md:m-10 text-txt border-b-2 pb-10 border-r-gray-900'>
         <div>
           <div className='w-72 h-72 lg:w-80 lg:h-80'>
             <Image
               src={urlFor(image && image[index]).url()}
               alt='product detail'
-              className='product-detail-image'
+              className='product-image'
               width={500}
               height={500}
               priority
             />
           </div>
 
-          <div className='small-images-container'>
+          <div className='flex mt-5 gap-5'>
             {image?.map((item, i) => (
               <Image
                 key={item._key}
                 src={urlFor(item).url()}
                 alt='product detail'
-                className={`small-image ${i === index ? 'selected-image' : ''}`}
+                className={`product-image ${i === index ? 'bg-red-600' : ''}`}
                 width={65}
                 height={65}
                 onMouseEnter={() => setIndex(i)}
@@ -66,9 +66,9 @@ const ProductDetails = ({ product }: Props) => {
             ))}
           </div>
         </div>
-        <div className='product-detail-desc'>
+        <div>
           <h1 className='text-3xl font-medium'>{name}</h1>
-          <div className='reviews'>
+          <div className='text-red-600 my-2'>
             <div className='flex'>
               <AiFillStar />
               <AiFillStar />
@@ -78,15 +78,15 @@ const ProductDetails = ({ product }: Props) => {
             </div>
             <p>(20)</p>
           </div>
-          <h4 className='font-medium'>Detajet</h4>
-          <p>{details}</p>
+          <h4 className='font-medium my-2'>Detajet</h4>
+          <p className='my-2'>{details}</p>
           <div className='mt-5'>
             <h4 className='font-medium'>Cmimi</h4>
             <p className='text-red-500 font-bold text-2xl'>
               {formatToLEK(price)}
             </p>
           </div>
-          <div className='quantity '>
+          <div className='mt-2 flex gap-5 justify-start items-center'>
             <h3 className='font-medium'>Quantity:</h3>
             <QuantityBox
               handleMinus={handleMinus}

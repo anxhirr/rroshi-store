@@ -7,11 +7,13 @@ const ProductsList = async () => {
 
   return (
     <>
-      <div className='products-heading'>
-        <h2>Produktet më të mira ne treg</h2>
+      <div className='my-9 text-center text-txt'>
+        <h2 className='text-4xl font-extrabold'>
+          Produktet më të mira ne treg
+        </h2>
         <p className='font-medium text-lg'>Speakers nga llojet më të veçantë</p>
       </div>
-      <div className='products-container'>
+      <div className='flex justify-center items-center flex-wrap gap-7'>
         {products?.map((product) => (
           <Product key={product._id} product={product} />
         ))}

@@ -14,7 +14,7 @@ const Product = ({ product }: Props) => {
   return (
     <div>
       <Link href={`/product/${slug.current}`}>
-        <div className='product-card w-max text-center'>
+        <div className='w-max text-center cursor-pointer text-txt hover:scale-110 duration-150'>
           <Image
             src={urlFor(image && image[0]).url()}
             alt='product'
@@ -22,8 +22,8 @@ const Product = ({ product }: Props) => {
             height={250}
             className='product-image'
           />
-          <p className='product-name'>{name}</p>
-          <p className='font-extrabold '>{formatToLEK(price)}</p>
+          <p className='text-xl font-semibold'>{name}</p>
+          <p className='font-extrabold text-md'>{formatToLEK(price)}</p>
         </div>
       </Link>
     </div>
