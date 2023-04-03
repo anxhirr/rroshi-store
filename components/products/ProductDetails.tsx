@@ -41,7 +41,7 @@ const ProductDetails = ({ product }: Props) => {
     <div>
       <div className='flex flex-col sm:flex-row gap-10 m-5 md:m-10 text-txt border-b-2 pb-10 border-r-gray-900'>
         <div>
-          <div className='w-72 h-72 lg:w-80 lg:h-80'>
+          <div className='product-image-wrapper w-72 h-72 lg:w-80 lg:h-80'>
             <Image
               src={urlFor(image && image[index]).url()}
               alt='product detail'
@@ -54,15 +54,19 @@ const ProductDetails = ({ product }: Props) => {
 
           <div className='flex mt-5 gap-5'>
             {image?.map((item, i) => (
-              <Image
+              <div
                 key={item._key}
-                src={urlFor(item).url()}
-                alt='product detail'
-                className={`product-image ${i === index ? 'bg-red-600' : ''}`}
-                width={65}
-                height={65}
-                onMouseEnter={() => setIndex(i)}
-              />
+                className='product-image-wrapper w-16 h-16 lg:w-20 lg:h-20'
+              >
+                <Image
+                  src={urlFor(item).url()}
+                  alt='product detail'
+                  className={`product-image ${i === index ? 'bg-red-600' : ''}`}
+                  width={65}
+                  height={65}
+                  onMouseEnter={() => setIndex(i)}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -87,7 +91,7 @@ const ProductDetails = ({ product }: Props) => {
             </p>
           </div>
           <div className='mt-2 flex gap-5 justify-start items-center'>
-            <h3 className='font-medium'>Quantity:</h3>
+            <h3 className='font-medium'>Sasia:</h3>
             <QuantityBox
               handleMinus={handleMinus}
               handlePlus={handlePlus}

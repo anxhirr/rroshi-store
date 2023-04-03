@@ -14,12 +14,12 @@ const Product = ({ product }: Props) => {
   return (
     <div>
       <Link href={`/product/${slug.current}`}>
-        <div className='w-max text-center cursor-pointer text-txt hover:scale-110 duration-150'>
+        <div className='product-image-wrapper w-max min-h-[20rem] text-center cursor-pointer text-txt hover:scale-110 duration-150'>
           <Image
             src={urlFor(image && image[0]).url()}
             alt='product'
             width={250}
-            height={250}
+            height={500}
             className='product-image'
           />
           <p className='text-xl font-semibold'>{name}</p>
