@@ -15,6 +15,7 @@ import {
 } from '../../lib/redux-store/cart-slice'
 import { formatToLEK } from '../../lib/format'
 import CartItem from './CartItem'
+import { BsFillCartXFill } from 'react-icons/bs'
 
 const Cart = () => {
   const dispatch = useDispatch()
@@ -86,6 +87,14 @@ const Cart = () => {
 
                       <div className='mt-8'>
                         <div className='flow-root'>
+                          {cartItems.length === 0 && (
+                            <div className='flex-1 flex flex-col justify-center items-center gap-2'>
+                              <BsFillCartXFill className='h-12 w-12 text-gray-500' />
+                              <p className='text-sm font-medium text-gray-900'>
+                                Your cart is empty
+                              </p>
+                            </div>
+                          )}
                           <ul
                             role='list'
                             className='-my-6 divide-y divide-gray-200'
